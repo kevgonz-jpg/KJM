@@ -1,0 +1,261 @@
+%----------------------------------------------------------%
+%          TEMPLATE - REVISTA SEMINA (26/01/2018)          %
+%----------------------------------------------------------%
+
+% CLASSE DE DOCUMENTO
+\PassOptionsToPackage{bookmarks=false}{hyperref}
+\documentclass[article,10pt,twoside,a4paper,twocolumn,hidelinks,english,brazil]{abntex2}
+
+% PACOTES
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\usepackage{indentfirst}
+\usepackage{color}
+\usepackage{fancyhdr,parskip}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{soulutf8}
+\usepackage{mathptmx}
+\usepackage{titling}
+\usepackage{etoolbox}
+\usepackage{titlesec}
+\usepackage{ragged2e}
+\usepackage{float}
+\usepackage[labelfont=bf,format=plain,justification=justified,singlelinecheck=false]{caption}
+\usepackage[bookmarks=false]{hyperref}
+\usepackage{helvet}
+\usepackage[alf,bibjustif,abnt-etal-list=0,abnt-etal-cite]{abntex2cite}
+%\usepackage[brazilian,hyperpageref]{backref}
+%\usepackage[alf,bibjustif,abnt-etal-list=0,abnt-etal-cite]{abntcite}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{multirow}
+
+
+%\addbibresource
+
+%\usepackage[alf]{abntex2cite}
+%\usepackage{amsmath}
+\usepackage{wrapfig}
+%\usepackage[hang]{footmisc}
+%%%%incluido
+%\usepackage[num,overcite]{abntex2cite}
+%\citebrackets[]
+\usepackage{url}  % pacote para quebrar linha da URL
+
+% AGREGA LA IMAGEN EN LA PARTE SUPERIOR IZQUIERDA
+\usepackage{eso-pic}
+\AddToShipoutPictureBG*{%
+  \AtPageUpperLeft{%
+    \raisebox{-\height-\baselineskip}{% Mueve la imagen 0.5 cm hacia abajo
+      \hspace*{0.4cm} % Mueve la imagen 1 cm a la izquierda
+      \includegraphics[width=2cm]{C:/Users/ADMON/Documents/Universidad/logo.png}%
+    }%
+  }
+}
+
+
+% MARGENS ESQUERDA, DIREITA, SUPERIOR E INFERIOR
+\setlrmarginsandblock{2.5cm}{2cm}{*}
+\setulmarginsandblock{2cm}{2.3cm}{*}
+\checkandfixthelayout
+
+% OUTROS ESPACAMENTOS
+\setlength{\droptitle}{-1.3cm}
+\setlength{\columnsep}{0.5cm}
+\setlength{\parindent}{0.5cm}
+\setlength{\parskip}{0.0cm}
+
+% LINHA HORIZONTAL
+\def\Vhrulefill{\leavevmode\leaders\hrule height 0.7ex depth \dimexpr0.5pt-0.7ex\hfill\kern0pt}
+
+% NOTAS DE RODAPE
+\thanksmarkseries{arabic}
+\setlength\thanksmarkwidth{.5em} %adicionei
+\renewcommand{\footnoterule}{
+    \kern -3pt
+    \hrule width 4.2cm height 0.5pt
+    \kern 2.6pt
+}
+\let\oldmakethanksmark\makethanksmark
+\renewcommand{\makethanksmark}{\oldmakethanksmark\small}
+\let\oldthanks\thanks
+\renewcommand{\thanks}[1]{\oldthanks{\small #1}}
+
+
+% SECOES E SUBSECOES
+\titleformat*{\section}{\fontsize{11pt}{13.2pt}\bfseries}
+\titleformat*{\subsection}{\itshape}{\fontsize{11pt}{1.2pt}}
+\titleformat*{\subsubsection}{\itshape}{\fontsize{11pt}{1.0pt}}
+
+% REFERENCIAS
+\apptocmd{\thebibliography}{\justifying}{}{}
+
+% ----ALGUNS DESTES DADOS SERÃO ADEQUADOS PELA EDITORAÇÃO CIENTÍFICA  -----------%
+
+% INFORMACOES DO ARTIGO E DA REVISTA
+
+\newcommand{\paginainicial}{1} % página inicial
+
+
+
+
+%----------autores tem que informar os dados AQUI----------
+\newcommand{\autorcabecalho}{Author1, F.~A.; Author2, Z.~Z.; Author3, R.;  Author4, S.~W.} % nomes dos autores no cabecalho
+\newcommand{\titulocabecalho}{} % titulo no cabecalho
+
+
+
+
+%---------------------------------------------------------%
+
+% PAGINA INICIAL
+\setcounter{page}{\paginainicial}
+
+% CABECALHO E RODAPE DA PRIMEIRA PAGINA
+\makepagestyle{firstpage}
+\makeoddhead{firstpage}{\hfill\fontfamily{phv}\scriptsize 35$^{\circ}$ Simposio Internacional de Estadística 2026 \\[0.15cm]
+\hfill Fecha: Julio 14 - Julio 17}{}{}
+
+
+
+\makeoddfoot{firstpage}{}{\fontfamily{phv}
+\footnotesize \selectfont \hspace{1cm} \Vhrulefill \hspace{0.65cm} \thepage \\ 35$^{\circ}$ Simposio Internacional de Estadística 2025 }
+
+
+
+
+
+
+
+% CABECALHO E RODAPE DAS DEMAIS PAGINAS
+\makepagestyle{text}
+\makeevenhead{text}{}{\fontfamily{phv} \footnotesize \selectfont \autorcabecalho}{}
+\makeoddhead{text}{}{\fontfamily{phv} \footnotesize \selectfont \titulocabecalho}{}
+\makeevenfoot{text}{}{\fontfamily{phv} \footnotesize \selectfont \thepage \hspace{0.65cm} \Vhrulefill \hspace{1cm}~\\ Semina: Ciências Exatas e Tecnológicas, Londrina, v. \volume, n. \numero, p. \paginainicial-\pageref{LastPage}, \mes \ano}{}
+\makeoddfoot{text}{}{\fontfamily{phv} \footnotesize \selectfont \hspace{1cm} \Vhrulefill \hspace{0.65cm} \thepage \\ Semina: Ciências Exatas e Tecnológicas, Londrina, v. \volume, n. \numero, p. \paginainicial-\pageref{LastPage}, \mes \ano}{}
+
+
+%----------------------- OS AUTORES DEVEM INCLUIR AS INFORMAÇÕES ABAIXO-------------%
+
+% TITULO % Gustavo 19 maio
+
+\titulo{\fontsize{16pt}{19.2pt} \selectfont
+    \textbf{Modelando la Curva de Rendimientos en Colombia: DNS y DNSS bajo la Lupa Bayesiana y Frecuentista}  % titulo
+}
+\tituloestrangeiro{\fontsize{12pt}{18pt} \selectfont
+    \textit{\textbf{Modeling the Yield Curve in Colombia: DNS and DNSS Under Bayesian and Frequentist Lenses}} % titulo em inglês
+}
+
+
+% AUTORES: Nome completo. Sobre os demais dados use abreveaturas, se necessário, para manter todas as informações/descrições,  de cada autor, em apenas uma  linha.  
+
+
+
+
+\autor{ \fontsize{13pt}{15.6pt} \selectfont
+    Juan David Garro\thanks{Est. Estadistica , UNAL - Med, E-mail: kgonzalezd@unal.edu.co}; % primer autor
+    Kevin Hair Gonzalez Duarte\thanks{Est. Ingeniería Administrativa , UNAL - Med, E-mail: jgarro@unal.edu.co}; % segundo autor}
+    Monica Andrea Arango Arango\thanks{Profesora Titular, UNAL - Med, E-mail: marango@unal.edu.co}; % tercer autor
+    \\
+    %\colorbox[rgb]{1,1,0}{autores enviar  informações completas - Mini currículo em português}
+   % Author 5\thanks{ Master student, Dept. Chemistry, USP, SP, Brazil; E-mail: author5@gmail.com}
+}
+
+%---------------------------------------------------------%
+
+% DATA
+\data{}
+
+\begin{document}
+
+\captionsetup{format=plain,justification=justified,singlelinecheck=false}
+
+% DEFINICOES DO ARTIGO E PRE-TEXTUAIS
+\selectlanguage{english}
+\frenchspacing
+% \nocite{*} % comentar esta linha se houver \cite
+
+\pretextual
+\SingleSpacing
+\onecolumn
+
+% TITULO E AUTORES
+\maketitle
+\vspace{-1.2cm}
+
+%Inserto imagen a la página
+%\thispagestyle{fancy}
+
+% ESTILO DA PRIMEIRA PAGINA
+\thispagestyle{firstpage}
+
+%----------------------- OS AUTORES DEVEM INCLUIR AS INFORMAÇÕES ABAIXO-------------%
+\hyphenation{} %  palavras sem quebras
+
+% RESUMO E PALAVRAS-CHAVE EM INGLES % Gustavo 19 maio
+\renewcommand{\resumoname}{\texorpdfstring{\fontsize{14pt}{16.8pt} \fontfamily{ptm} \selectfont \textbf{Resumen} \\[-0.3cm] \rule{0.91\textwidth}{0.5pt} \vspace{-0.5cm}}{Abstract}}
+\begin{resumoumacoluna}
+    \normalsize
+
+Los Títulos de Tesorería (TES) constituyen el activo libre de riesgo y la columna vertebral del mercado de
+capitales colombiano. Aunque los modelos de la familia Nelson-Siegel son ampliamente utilizados para modelar
+su curva de rendimientos, la literatura tradicional suele fijar el parámetro de decaimiento ($\tau$) como una
+constante, omitiendo la naturaleza dinámica de la estructura temporal de tasas. Para cubrir esta brecha empírica, 
+este estudio contrasta rigurosamente la estimación de la curva cero-cupón mediante modelos de espacio de estados, 
+evaluando metodologías frecuentistas frente a estimaciones bayesianas puras. Metodológicamente, se construye un 
+panel histórico de tasas spot mediante el método de bootstrapping de Fama-Bliss en seis nodos de vencimiento
+(entre 2 y 15 años). Sobre este panel, se extraen los factores latentes aplicando los modelos Dinámico de Nelson-Siegel
+(DNS) y Nelson-Siegel-Svensson (DNSS) bajo dos paradigmas: (1) un enfoque frecuentista basado en el Filtro de Kalman, 
+optimizando los parámetros $\tau$ a través de una búsqueda de grilla en ventana rodante, y (2) un enfoque Bayesiano 
+mediante el algoritmo de Muestreo de Gibbs, que estima conjuntamente los factores $\beta$ y $\tau$. El desempeño de 
+las metodologías se evalúa a través de métricas de bondad de ajuste. La hipótesis 
+central sugiere que la estimación dinámica de $\tau$ reduce significativamente los errores de pronóstico. Se anticipa 
+que el enfoque Bayesiano ofrezca una ventaja predictiva al capturar mejor la incertidumbre durante periodos volátiles,
+mientras que el Filtro de Kalman destaca por su eficiencia computacional y ajuste competitivo. Esta investigación proyecta consolidar un marco analítico superior frente a los modelos estáticos tradicionales, proveyendo herramientas robustas para la valoración de activos, gestión de riesgos y toma de decisiones en Colombia.
+
+\vspace{0.4 cm}
+    \noindent \textbf{Palabras clave:} xxxxxxxxxxxxxxxx
+
+\end{resumoumacoluna}
+
+
+% RESUMO E PALAVRAS-CHAVE EM PORTUGUES % Gustavo 19 maio
+\renewcommand{\resumoname}{\texorpdfstring{\fontsize{14pt}{16.8pt} \fontfamily{ptm} \selectfont \textbf{Abstract} \\[-0.3cm] \rule{0.91\textwidth}{0.5pt} \vspace{-0.5cm}}{Resumo}}
+\begin{resumoumacoluna}
+    \normalsize
+
+The Treasury Bonds (TES) are the risk-free asset and the backbone of the Colombian capital market. 
+Although the Nelson-Siegel family of models is widely used to model their yield curve, traditional 
+literature often fixes the decay parameter ($\tau$) as a constant, overlooking the dynamic nature of
+the term structure of rates. To fill this empirical gap, this study rigorously contrasts the estimation
+of the zero-coupon curve through state-space models, evaluating frequentist methodologies against pure
+Bayesian estimations. Methodologically, a historical panel of spot rates is constructed using the 
+Fama-Bliss bootstrapping method at six maturity nodes (between 2 and 15 years). On this panel, latent
+factors are extracted by applying Dynamic Nelson-Siegel (DNS) and Nelson-Siegel-Svensson (DNSS) models 
+under two paradigms: (1) a frequentist approach based on the Kalman Filter, optimizing $\tau$ parameters 
+through a grid search in a rolling window, and (2) a Bayesian approach using the Gibbs Sampling algorithm, 
+which jointly estimates $\beta$ and $\tau$ factors. The performance of the methodologies is evaluated through 
+goodness-of-fit metrics. The central hypothesis suggests that dynamic estimation of 
+$\tau$ significantly reduces forecasting errors. It is anticipated that the Bayesian approach will offer a 
+predictive advantage by better capturing uncertainty during volatile periods, while the Kalman Filter stands 
+out for its computational efficiency and competitive fit. This research projects to consolidate a superior 
+analytical framework compared to traditional static models, providing robust tools for asset valuation, risk 
+management, and decision-making in Colombia.   
+
+\vspace{0.4cm}
+    \noindent \textbf{Keywords:} xxxxxxxxxxxxxxxx
+
+%---------------------------------------------------------
+\end{resumoumacoluna}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
+
+Página 2 de 2

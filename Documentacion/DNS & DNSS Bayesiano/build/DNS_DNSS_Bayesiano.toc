@@ -1,0 +1,53 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción y motivación}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}¿Por qué un enfoque bayesiano?}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Estructura del notebook}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Modelo espacio-estado}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Formulación general}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Cargas Nelson-Siegel (DNS, $k=3$)}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Cargas Nelson-Siegel-Svensson (DNSS, $k=4$)}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Estructura de $\mathbf {F}$}{5}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Forward Filter Backward Sampler (FFBS)}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}¿Por qué FFBS y no muestreo univariado?}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Algoritmo completo}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Inicialización estacionaria}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Implementación en Python}{7}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Distribuciones posteriores conjugadas}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Posterior de $\mu _i$ y $f_i$ (Normal conjugada)}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Posterior de $q_i$ (Inverse-Gamma conjugada)}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Posterior de $r_n$ (Inverse-Gamma conjugada)}{8}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Extensiones: Opciones A y C}{9}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Opción A — $\mathbf {R}$ estructurada por grupos de plazos}{9}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Opción C — Pesos en la posterior de $\mathbf {R}$}{9}{subsubsection.4.4.2}%
+\contentsline {section}{\numberline {5}Metropolis-Hastings para $\tau $}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}¿Por qué MH y no posterior conjugada?}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Log-verosimilitud marginal para MH}{9}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Propuesta y ratio de aceptación}{10}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Adaptación durante el burn-in}{10}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Especificación de priors}{10}{section.6}%
+\contentsline {section}{\numberline {7}Diagnósticos de convergencia MCMC}{11}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Estadístico $\hat {R}$ de Gelman-Rubin}{11}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Effective Sample Size (ESS)}{12}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Visualizaciones de diagnóstico}{12}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Documentación de funciones}{13}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Funciones de cargas}{13}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Posteriors conjugadas}{13}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Metropolis-Hastings para $\tau $}{14}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Especificación de priors}{14}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Una cadena: \texttt {run\_chain()}}{15}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.6}Multi-cadena: \texttt {run\_chains\_parallel()}}{15}{subsection.8.6}%
+\contentsline {subsection}{\numberline {8.7}Diagnósticos}{16}{subsection.8.7}%
+\contentsline {subsection}{\numberline {8.8}Visualizaciones MCMC}{16}{subsection.8.8}%
+\contentsline {subsection}{\numberline {8.9}Post-ajuste}{16}{subsection.8.9}%
+\contentsline {section}{\numberline {9}Función principal \texttt {fit\_dns\_bayes()}}{17}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Firma completa}{17}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Descripción de parámetros}{18}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Estructura del retorno}{18}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Ejemplos de uso}{19}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Ejemplo 1 — DNS básico}{19}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Ejemplo 2 — DNSS con prior informativo y mejoras para plazos largos}{20}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Ejemplo 3 — Comparativa bayesiano vs KF}{21}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Ejemplo 4 — Uso programático sin gráficos}{22}{subsection.10.4}%
+\contentsline {section}{\numberline {11}Referencia completa de funciones}{23}{section.11}%
+\contentsline {section}{\numberline {12}Guía de decisiones}{24}{section.12}%
+\contentsline {section}{Referencias}{24}{table.caption.6}%

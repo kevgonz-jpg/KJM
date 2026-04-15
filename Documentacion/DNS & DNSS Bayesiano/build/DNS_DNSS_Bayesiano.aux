@@ -1,0 +1,107 @@
+\relax 
+\providecommand \babel@aux [2]{\global \let \babel@toc \@gobbletwo }
+\@nameuse{bbl@beforestart}
+\catcode `"\active 
+\catcode `<\active 
+\catcode `>\active 
+\@nameuse{es@quoting}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand*\HyPL@Entry[1]{}
+\HyPL@Entry{0<</S/D>>}
+\babel@aux{spanish}{}
+\HyPL@Entry{1<</S/D>>}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introducción y motivación}{3}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}¿Por qué un enfoque bayesiano?}{3}{subsection.1.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Comparación Kalman Filter + MLE vs. Gibbs Sampler bayesiano}}{3}{table.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:kf_vs_bayes}{{1}{3}{Comparación Kalman Filter + MLE vs. Gibbs Sampler bayesiano}{table.caption.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Estructura del notebook}{3}{subsection.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Modelo espacio-estado}{4}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Formulación general}{4}{subsection.2.1}\protected@file@percent }
+\newlabel{eq:obs}{{1}{4}{Formulación general}{equation.1}{}}
+\newlabel{eq:trans}{{2}{4}{Formulación general}{equation.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Cargas Nelson-Siegel (DNS, $k=3$)}{5}{subsection.2.2}\protected@file@percent }
+\newlabel{eq:ns_loadings}{{3}{5}{Cargas Nelson-Siegel (DNS, $k=3$)}{equation.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Cargas Nelson-Siegel-Svensson (DNSS, $k=4$)}{5}{subsection.2.3}\protected@file@percent }
+\newlabel{eq:nss_loadings}{{4}{5}{Cargas Nelson-Siegel-Svensson (DNSS, $k=4$)}{equation.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Estructura de $\mathbf  {F}$}{5}{subsection.2.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Estructuras de $\mathbf  {F}$ disponibles}}{5}{table.caption.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Forward Filter Backward Sampler (FFBS)}{5}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}¿Por qué FFBS y no muestreo univariado?}{6}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Algoritmo completo}{6}{subsection.3.2}\protected@file@percent }
+\newlabel{alg:ffbs}{{3.1}{6}{FFBS — Carter \& Kohn (1994)}{algoritmo.3.1}{}}
+\newlabel{eq:pred_state}{{5}{6}{FFBS — Carter \& Kohn (1994)}{equation.5}{}}
+\newlabel{eq:pred_cov}{{6}{6}{FFBS — Carter \& Kohn (1994)}{equation.6}{}}
+\newlabel{eq:innov}{{7}{6}{FFBS — Carter \& Kohn (1994)}{equation.7}{}}
+\newlabel{eq:innov_var}{{8}{6}{FFBS — Carter \& Kohn (1994)}{equation.8}{}}
+\newlabel{eq:kalman_gain}{{9}{6}{FFBS — Carter \& Kohn (1994)}{equation.9}{}}
+\newlabel{eq:update_state}{{10}{6}{FFBS — Carter \& Kohn (1994)}{equation.10}{}}
+\newlabel{eq:update_cov}{{11}{6}{FFBS — Carter \& Kohn (1994)}{equation.11}{}}
+\newlabel{eq:pred_ahead}{{12}{6}{FFBS — Carter \& Kohn (1994)}{equation.12}{}}
+\newlabel{eq:smooth_gain}{{13}{6}{FFBS — Carter \& Kohn (1994)}{equation.13}{}}
+\newlabel{eq:smooth_mean}{{14}{6}{FFBS — Carter \& Kohn (1994)}{equation.14}{}}
+\newlabel{eq:smooth_cov}{{15}{6}{FFBS — Carter \& Kohn (1994)}{equation.15}{}}
+\newlabel{eq:back_sample}{{16}{6}{FFBS — Carter \& Kohn (1994)}{equation.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Inicialización estacionaria}{7}{subsection.3.3}\protected@file@percent }
+\newlabel{eq:lyapunov}{{17}{7}{Inicialización estacionaria}{equation.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Implementación en Python}{7}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Distribuciones posteriores conjugadas}{7}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Posterior de $\mu _i$ y $f_i$ (Normal conjugada)}{7}{subsection.4.1}\protected@file@percent }
+\newlabel{eq:post_mu}{{20}{8}{Posterior de $\mu _i$ y $f_i$ (Normal conjugada)}{equation.20}{}}
+\newlabel{eq:post_f}{{22}{8}{Posterior de $\mu _i$ y $f_i$ (Normal conjugada)}{equation.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Posterior de $q_i$ (Inverse-Gamma conjugada)}{8}{subsection.4.2}\protected@file@percent }
+\newlabel{eq:post_q}{{23}{8}{Posterior de $q_i$ (Inverse-Gamma conjugada)}{equation.23}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Posterior de $r_n$ (Inverse-Gamma conjugada)}{8}{subsection.4.3}\protected@file@percent }
+\newlabel{eq:post_r}{{24}{8}{Posterior de $r_n$ (Inverse-Gamma conjugada)}{equation.24}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Extensiones: Opciones A y C}{9}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}Opción A — $\mathbf  {R}$ estructurada por grupos de plazos}{9}{subsubsection.4.4.1}\protected@file@percent }
+\newlabel{eq:post_r_groups}{{25}{9}{Opción A — $\bR $ estructurada por grupos de plazos}{equation.25}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.2}Opción C — Pesos en la posterior de $\mathbf  {R}$}{9}{subsubsection.4.4.2}\protected@file@percent }
+\newlabel{eq:post_r_weighted}{{26}{9}{Opción C — Pesos en la posterior de $\bR $}{equation.26}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Metropolis-Hastings para $\tau $}{9}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}¿Por qué MH y no posterior conjugada?}{9}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Log-verosimilitud marginal para MH}{9}{subsection.5.2}\protected@file@percent }
+\newlabel{eq:marginal_loglik}{{27}{9}{Log-verosimilitud marginal para MH}{equation.27}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Propuesta y ratio de aceptación}{10}{subsection.5.3}\protected@file@percent }
+\newlabel{eq:mh_ratio}{{30}{10}{Propuesta y ratio de aceptación}{equation.30}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Adaptación durante el burn-in}{10}{subsection.5.4}\protected@file@percent }
+\newlabel{eq:adapt_sigma}{{31}{10}{Adaptación durante el burn-in}{equation.31}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Especificación de priors}{10}{section.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Especificación de priors — función \texttt  {make\_priors()}}}{11}{table.caption.3}\protected@file@percent }
+\newlabel{tab:priors}{{3}{11}{Especificación de priors — función \texttt {make\_priors()}}{table.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Diagnósticos de convergencia MCMC}{11}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Estadístico $\hat  {R}$ de Gelman-Rubin}{11}{subsection.7.1}\protected@file@percent }
+\newlabel{eq:rhat}{{35}{12}{Estadístico $\hat {R}$ de Gelman-Rubin}{equation.35}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Effective Sample Size (ESS)}{12}{subsection.7.2}\protected@file@percent }
+\newlabel{eq:ess}{{36}{12}{Effective Sample Size (ESS)}{equation.36}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Interpretación del ESS}}{12}{table.caption.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Visualizaciones de diagnóstico}{12}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Documentación de funciones}{13}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Funciones de cargas}{13}{subsection.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Posteriors conjugadas}{13}{subsection.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Metropolis-Hastings para $\tau $}{14}{subsection.8.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Especificación de priors}{14}{subsection.8.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.5}Una cadena: \texttt  {run\_chain()}}{15}{subsection.8.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.6}Multi-cadena: \texttt  {run\_chains\_parallel()}}{15}{subsection.8.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.7}Diagnósticos}{16}{subsection.8.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.8}Visualizaciones MCMC}{16}{subsection.8.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.9}Post-ajuste}{16}{subsection.8.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Función principal \texttt  {fit\_dns\_bayes()}}{17}{section.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Firma completa}{17}{subsection.9.1}\protected@file@percent }
+\gdef \LT@i {\LT@entry 
+    {1}{111.58464pt}\LT@entry 
+    {1}{68.9055pt}\LT@entry 
+    {1}{253.84842pt}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Descripción de parámetros}{18}{subsection.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Estructura del retorno}{18}{subsection.9.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}Ejemplos de uso}{19}{section.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Ejemplo 1 — DNS básico}{19}{subsection.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Ejemplo 2 — DNSS con prior informativo y mejoras para plazos largos}{20}{subsection.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Ejemplo 3 — Comparativa bayesiano vs KF}{21}{subsection.10.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.4}Ejemplo 4 — Uso programático sin gráficos}{22}{subsection.10.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11}Referencia completa de funciones}{23}{section.11}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Todas las funciones del notebook en orden de dependencia}}{23}{table.caption.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {12}Guía de decisiones}{24}{section.12}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces ¿Cuándo usar cada opción?}}{24}{table.caption.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Referencias}{24}{table.caption.6}\protected@file@percent }
+\gdef \@abspage@last{26}

@@ -1,0 +1,33 @@
+{
+  "latex-workshop.linting.chktex.exec.path": "C:/Users/ADMON/AppData/Local/Programs/MiKTeX/miktex/bin/x64/chktex.exe",
+  "latex-workshop.linting.chktex.enabled": false,
+  "latex.linter.enabled": false,
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk_xelatex",
+      "command": "latexmk",
+      "args": [
+        "-xelatex",
+        "-outdir=C:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/Paper/Abstract",
+        "-auxdir=C:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/Paper/Abstract/build",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk (xelatex)",
+      "tools": [
+        "latexmk_xelatex"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "latexmk (xelatex)",
+  "latex-workshop.latex.outDir": "C:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/Paper/Abstract",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.synctex.afterBuild.enabled": true,
+  "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click"
+}

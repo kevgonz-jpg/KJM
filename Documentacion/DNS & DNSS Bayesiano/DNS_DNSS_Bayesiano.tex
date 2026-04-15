@@ -1,0 +1,1498 @@
+% ============================================================
+%  DNS / DNSS Bayesiano con Gibbs Sampler
+%  Documentación técnica — Proyecto KJM
+% ============================================================
+\documentclass[12pt, a4paper]{article}
+
+% ── Codificación y fuentes ───────────────────────────────────
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont[Scale=0.88]{Consolas}
+\usepackage{microtype}
+
+% ── Idioma ───────────────────────────────────────────────────
+\usepackage[spanish]{babel}
+
+% ── Geometría ────────────────────────────────────────────────
+\usepackage[
+  top=2.5cm, bottom=2.8cm,
+  left=2.8cm, right=2.8cm,
+  headheight=15pt
+]{geometry}
+
+% ── Colores ──────────────────────────────────────────────────
+\usepackage[dvipsnames, table]{xcolor}
+\definecolor{azulprincipal}{HTML}{1A3A5C}
+\definecolor{azulmedio}{HTML}{2E6DA4}
+\definecolor{azulclaro}{HTML}{D6E8F7}
+\definecolor{azulmuyclaro}{HTML}{EEF5FC}
+\definecolor{verdecod}{HTML}{1B6B3A}
+\definecolor{grisclaro}{HTML}{F4F4F4}
+\definecolor{grismedio}{HTML}{CCCCCC}
+\definecolor{rojoacento}{HTML}{C0392B}
+\definecolor{naranjacita}{HTML}{D35400}
+\definecolor{moradoprior}{HTML}{7D3C98}
+\definecolor{verdetip}{HTML}{1E8449}
+
+% ── Matemáticas ──────────────────────────────────────────────
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{bm}           % \bm para negritas matemáticas
+\usepackage{bbm}          % \mathbbm{1}
+
+% ── Tablas ───────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{longtable}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+% ── Gráficos y TikZ ──────────────────────────────────────────
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta, shapes.geometric, positioning, fit,
+                backgrounds, decorations.pathreplacing, calc}
+
+% ── Código fuente ────────────────────────────────────────────
+\usepackage{listings}
+\lstset{
+  language=Python,
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{azulmedio}\bfseries,
+  stringstyle=\color{rojoacento},
+  commentstyle=\color{verdecod}\itshape,
+  numberstyle=\tiny\color{gray},
+  numbers=left,
+  numbersep=8pt,
+  breaklines=true,
+  backgroundcolor=\color{grisclaro},
+  showstringspaces=false,
+  tabsize=4,
+  frame=none,
+  xleftmargin=14pt,
+  framexleftmargin=14pt,
+  aboveskip=4pt,
+  belowskip=4pt,
+  morekeywords={True,False,None,np,pd,plt,def,return,import,from,as,for,in,if,elif,else},
+}
+
+% ── Cajas decorativas (tcolorbox) ────────────────────────────
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{listings, breakable, skins}
+
+% Caja de teorema / definición
+\newtcolorbox{teoremabox}[2][]{
+  enhanced, breakable,
+  colback=azulmuyclaro, colframe=azulmedio,
+  colbacktitle=azulprincipal, coltitle=white,
+  fonttitle=\bfseries\small,
+  title={#2},
+  sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  #1
+}
+
+% Caja de nota / advertencia
+\newtcolorbox{notabox}[1][Nota]{
+  enhanced, breakable,
+  colback=grisclaro, colframe=grismedio,
+  colbacktitle=grismedio, coltitle=black,
+  fonttitle=\bfseries\footnotesize,
+  title={#1},
+  left=6pt, right=6pt, top=3pt, bottom=3pt,
+  sharp corners,
+}
+
+% Caja de tip / recomendación
+\newtcolorbox{tipbox}[1][Recomendación]{
+  enhanced, breakable,
+  colback=white, colframe=verdetip,
+  borderline west={3pt}{0pt}{verdetip},
+  colbacktitle=verdetip, coltitle=white,
+  fonttitle=\bfseries\footnotesize,
+  title={#1},
+  left=8pt, right=6pt, top=3pt, bottom=3pt,
+  sharp corners,
+  boxrule=0.4pt,
+}
+
+% Caja de código completa
+\newtcolorbox{codigocaja}[2][]{
+  enhanced, breakable,
+  colback=grisclaro, colframe=azulmedio,
+  colbacktitle=azulmedio!85!black, coltitle=white,
+  fonttitle=\ttfamily\small,
+  title={#2},
+  left=2pt, right=2pt, top=2pt, bottom=2pt,
+  #1
+}
+
+% ── Encabezados y pies de página ────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{azulmedio}\textit{DNS/DNSS Bayesiano — Gibbs Sampler}}
+\fancyhead[R]{\small\color{azulmedio}\textit{Proyecto KJM}}
+\fancyfoot[C]{\small\color{grismedio}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{azulmedio}\leaders\hrule height \headrulewidth\hfill}}
+
+% ── Hipervínculos ────────────────────────────────────────────
+\usepackage[
+  colorlinks=true,
+  linkcolor=azulmedio,
+  citecolor=naranjacita,
+  urlcolor=azulmedio,
+  bookmarks=true,
+  bookmarksnumbered=true,
+  pdftitle={DNS/DNSS Bayesiano — Documentación Técnica},
+  pdfauthor={Proyecto KJM}
+]{hyperref}
+
+% ── Bibliografía ─────────────────────────────────────────────
+\usepackage[round, authoryear]{natbib}
+
+% ── Secciones personalizadas ─────────────────────────────────
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{azulprincipal}}
+  {\thesection.}{0.8em}{}
+  [\color{azulmedio}\rule{\textwidth}{0.6pt}\vspace{2pt}]
+
+\titleformat{\subsection}
+  {\large\bfseries\color{azulmedio}}
+  {\thesubsection.}{0.7em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{azulprincipal!70!black}}
+  {\thesubsubsection.}{0.6em}{}
+
+% ── Entornos matemáticos ─────────────────────────────────────
+\theoremstyle{plain}
+\newtheorem{proposicion}{Proposición}[section]
+\theoremstyle{definition}
+\newtheorem{definicion}{Definición}[section]
+\newtheorem{algoritmo}{Algoritmo}[section]
+\theoremstyle{remark}
+\newtheorem{observacion}{Observación}[section]
+
+% ── Comandos matemáticos propios ─────────────────────────────
+\newcommand{\bbet}{\bm{\beta}}
+\newcommand{\btau}{\bm{\tau}}
+\newcommand{\bmu}{\bm{\mu}}
+\newcommand{\beps}{\bm{\varepsilon}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bzero}{\mathbf{0}}
+\newcommand{\IG}{\mathcal{IG}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\TN}{\mathcal{TN}}
+\newcommand{\prob}[1]{p\!\left(#1\right)}
+\newcommand{\E}[1]{\mathbb{E}\!\left[#1\right]}
+\newcommand{\Var}[1]{\text{Var}\!\left[#1\right]}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Rhat}{\hat{R}}
+
+% ── Miscelánea ───────────────────────────────────────────────
+\usepackage{enumitem}
+\usepackage{caption}
+\captionsetup{font=small, labelfont={bf,color=azulprincipal}}
+\usepackage{float}
+\usepackage{parskip}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% ══════════════════════════════════════════════════════════════
+\begin{document}
+% ══════════════════════════════════════════════════════════════
+
+% ─────────────────────────────────────────────────────────────
+%  PORTADA
+% ─────────────────────────────────────────────────────────────
+\begin{titlepage}
+\pagecolor{azulprincipal}
+\color{white}
+
+\vspace*{0.5cm}
+
+\begin{center}
+{\small\sffamily\color{azulclaro} PROYECTO KJM — DOCUMENTACIÓN TÉCNICA}
+\vspace{0.4cm}
+
+\rule{\textwidth}{1pt}
+\vspace{0.4cm}
+
+{\Huge\bfseries\sffamily
+  DNS / DNSS Bayesiano\\[0.3em]
+  con Gibbs Sampler}
+
+\vspace{0.3cm}
+\rule{\textwidth}{0.4pt}
+\vspace{0.4cm}
+
+{\large\sffamily\color{azulclaro}
+  Fundamentos teóricos, implementación en Python\\
+  y documentación de la función \texttt{fit\_dns\_bayes()}}
+
+\vspace{0.6cm}
+
+% Pipeline diagram
+\begin{tikzpicture}[
+  node distance=0.1cm,
+  box/.style={
+    rectangle, rounded corners=4pt,
+    fill=azulmedio!60!azulprincipal,
+    draw=azulclaro!60, line width=0.6pt,
+    text=white, font=\small\bfseries\sffamily,
+    minimum width=3.2cm, minimum height=0.75cm,
+    inner sep=4pt
+  },
+  arr/.style={-Stealth, color=azulclaro!70, line width=1.8pt}
+]
+  \node[box] (ffbs)   {FFBS};
+  \node[box, right=of ffbs]  (fmu)   {$F,\,\bmu$};
+  \node[box, right=of fmu]   (Q)     {$\bQ$};
+  \node[box, right=of Q]     (R)     {$\bR$};
+  \node[box, right=of R]     (tau)   {$\btau$ (MH)};
+  \draw[arr] (ffbs) -- (fmu);
+  \draw[arr] (fmu)  -- (Q);
+  \draw[arr] (Q)    -- (R);
+  \draw[arr] (R)    -- (tau);
+  \draw[arr] (tau) to[bend right=55] node[below,font=\footnotesize\color{azulclaro!80}]{siguiente iteración} (ffbs);
+  \node[above=0.25cm of Q, font=\footnotesize\color{azulclaro!80}]
+    {Gibbs Sampler --- un ciclo};
+\end{tikzpicture}
+
+\vspace{2cm}
+
+\begin{tabular}{cc}
+  \textbf{Nelson-Siegel (DNS)} & \textbf{Nelson-Siegel-Svensson (DNSS)} \\[4pt]
+  $k = 3$ factores & $k = 4$ factores \\[2pt]
+  $\tau_1$ via MH 1D & $(\tau_1, \tau_2)$ via MH 2D \\
+\end{tabular}
+
+\vspace{2cm}
+\rule{\textwidth}{0.4pt}
+\vspace{0.5cm}
+
+{\small\sffamily\color{azulclaro}
+  \textbf{Referencias principales:} Carter \& Kohn (1994) $\cdot$
+  Caldeira, Laurini \& Portugal (2010) $\cdot$ Çakmaklı (2013) \\
+  Nelson \& Siegel (1987) $\cdot$ Svensson (1994) $\cdot$
+  Diebold \& Li (2006) $\cdot$ Gelman \& Rubin (1992)
+}
+\end{center}
+\end{titlepage}
+
+\nopagecolor
+\color{black}
+
+% ─────────────────────────────────────────────────────────────
+%  ÍNDICE
+% ─────────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════
+\section{Introducción y motivación}
+% ══════════════════════════════════════════════════════════════
+
+\subsection{¿Por qué un enfoque bayesiano?}
+
+El estimador de Máxima Verosimilitud (MLE) con Filtro de Kalman produce estimaciones
+\emph{puntuales} de los factores $\bbet_{1:T}$ y los parámetros $\bm{\theta}$.
+Esto tiene dos consecuencias importantes en la práctica:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Los \textbf{intervalos de confianza} de los factores no incorporan la
+        incertidumbre sobre los parámetros $\bm{\theta}$ — son condicionales en
+        $\hat{\bm{\theta}}$ y por tanto subestiman la incertidumbre total.
+  \item El parámetro de forma $\tau$ se selecciona como un punto
+        (via Grid Search), descartando la incertidumbre sobre su valor.
+\end{itemize}
+
+El enfoque bayesiano resuelve ambos problemas al \textbf{probar sobre toda la
+distribución posterior} $p(\bbet_{1:T}, \bm{\theta}, \btau \mid \bY)$
+en lugar de optimizarla. La Tabla~\ref{tab:kf_vs_bayes} resume las diferencias.
+
+\begin{table}[H]
+\centering
+\caption{Comparación Kalman Filter + MLE vs. Gibbs Sampler bayesiano}
+\label{tab:kf_vs_bayes}
+\small
+\begin{tabular}{L{3.8cm} L{5.2cm} L{5.2cm}}
+\toprule
+\textbf{Aspecto}
+  & \textbf{Kalman Filter + MLE}
+  & \textbf{Gibbs Sampler (Bayes)} \\
+\midrule
+Factores $\bbet_{1:T}$
+  & Estimado puntual $\E{\bbet_t \mid \bY, \hat{\bm{\theta}}}$
+  & Distribución completa $p(\bbet_{1:T} \mid \bY)$ \\
+\addlinespace
+Parámetros $\bm{\theta}$
+  & Optimización numérica (L-BFGS-B)
+  & Distribución posterior $p(\bm{\theta} \mid \bY)$ \\
+\addlinespace
+Incertidumbre
+  & Solo la del estado ($P_{t|t}$)
+  & Paramétrica $+$ de estado $+$ de $\tau$ \\
+\addlinespace
+Intervalos
+  & Asintóticos, condicionales en $\hat{\bm{\theta}}$
+  & Intervalos de credibilidad exactos \\
+\addlinespace
+$\tau$
+  & Fijo via Grid Search
+  & Distribución posterior via MH \\
+\addlinespace
+Costo computacional
+  & $O(T \cdot N^2 \cdot k^2)$
+  & $O(n_\text{iter} \cdot T \cdot N^2 \cdot k^2)$ \\
+\addlinespace
+Información a priori
+  & No incorporada
+  & Incorporada mediante priors \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Estructura del notebook}
+
+El notebook \texttt{DNS\_DNSS\_Bayesiano\_Gibbs.ipynb} implementa el pipeline
+completo en 20 celdas organizadas en el orden de dependencia natural:
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=0.45cm and 1.5cm,
+  box/.style={
+    rectangle, rounded corners=3pt,
+    draw=azulmedio, fill=azulmuyclaro,
+    font=\small, inner sep=5pt,
+    minimum width=3.8cm, minimum height=0.55cm
+  },
+  arr/.style={-Stealth, azulmedio, line width=0.8pt}
+]
+  \node[box] (c0)  {Cel. 0: Imports};
+  \node[box, below=of c0] (c1)  {Cel. 1--2: Datos y cargas};
+  \node[box, below=of c1] (c2)  {Cel. 3--4: FFBS + log-lik};
+  \node[box, below=of c2] (c3)  {Cel. 5--6: Posteriors + MH};
+  \node[box, below=of c3] (c4)  {Cel. 7--9: Priors + sampler + diagnóst.};
+  \node[box, below=of c4] (c5)  {Cel. 10--11: Ejecución DNS y DNSS};
+  \node[box, below=of c5] (c6)  {Cel. 12--14: Traceplots, ACF, posteriors};
+  \node[box, below=of c6] (c7)  {Cel. 15--17: Factores, curvas, residuos};
+  \node[box, below=of c7] (c8)  {Cel. 18: \texttt{fit\_dns\_bayes()}};
+  \node[box, below=of c8] (c9)  {Cel. 19: Opciones A y C};
+  \foreach \a/\b in {c0/c1,c1/c2,c2/c3,c3/c4,c4/c5,c5/c6,c6/c7,c7/c8,c8/c9}
+    \draw[arr] (\a) -- (\b);
+\end{tikzpicture}
+\end{center}
+
+% ══════════════════════════════════════════════════════════════
+\section{Modelo espacio-estado}
+% ══════════════════════════════════════════════════════════════
+
+\subsection{Formulación general}
+
+El modelo trabaja en el marco de espacio-estado lineal gaussiano:
+
+\begin{teoremabox}{Modelo espacio-estado DNS/DNSS}
+\textbf{Ecuación de observación:}
+\begin{equation}
+  \by_t = \bH(\btau)\,\bbet_t + \beps_t, \qquad
+  \beps_t \sim \N(\bzero,\,\bR)
+  \label{eq:obs}
+\end{equation}
+
+\textbf{Ecuación de transición:}
+\begin{equation}
+  \bbet_t = \bmu + \bF(\bbet_{t-1} - \bmu) + \bm{\eta}_t, \qquad
+  \bm{\eta}_t \sim \N(\bzero,\,\bQ)
+  \label{eq:trans}
+\end{equation}
+
+donde $\by_t \in \mathbb{R}^N$ son los rendimientos observados en $N$ plazos,
+$\bbet_t \in \mathbb{R}^k$ son los factores latentes ($k=3$ para DNS, $k=4$ para DNSS),
+$\bH(\btau) \in \mathbb{R}^{N \times k}$ son las cargas (variables en $\btau$),
+$\bmu \in \mathbb{R}^k$ es la media de largo plazo,
+$\bF \in \mathbb{R}^{k \times k}$ es la matriz de transición,
+$\bR = \diag(r_1,\ldots,r_N)$ y $\bQ = \diag(q_1,\ldots,q_k)$ son matrices diagonales.
+\end{teoremabox}
+
+\subsection{Cargas Nelson-Siegel (DNS, $k=3$)}
+
+La función de carga mapea cada plazo $m_n$ a un vector de pesos para los tres factores:
+
+\begin{equation}
+  \bH_n(\tau_1) = \left[1, \quad
+    \frac{1-e^{-m_n/\tau_1}}{m_n/\tau_1}, \quad
+    \frac{1-e^{-m_n/\tau_1}}{m_n/\tau_1} - e^{-m_n/\tau_1}
+  \right]
+  \label{eq:ns_loadings}
+\end{equation}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item $\beta_{0,t}$: \textbf{nivel} — carga constante $= 1$; domina en plazos largos.
+  \item $\beta_{1,t}$: \textbf{pendiente} — carga decreciente de 1 a 0; spread largo-corto.
+  \item $\beta_{2,t}$: \textbf{curvatura} — carga con joroba (\emph{hump}) en
+        $m^* \approx 1.793\,\tau_1$ años.
+\end{itemize}
+
+\subsection{Cargas Nelson-Siegel-Svensson (DNSS, $k=4$)}
+
+los autores extiende la especificación con un cuarto factor que captura
+una segunda curvatura, útil cuando existe una prima de plazo significativa:
+
+\begin{equation}
+  \bH_n(\tau_1,\tau_2) = \left[\bH_n(\tau_1), \quad
+    \frac{1-e^{-m_n/\tau_2}}{m_n/\tau_2} - e^{-m_n/\tau_2}
+  \right]
+  \label{eq:nss_loadings}
+\end{equation}
+
+El segundo hump ocurre en $m^{**} \approx 1.793\,\tau_2$. Se impone la
+restricción $|\tau_1 - \tau_2| \geq 0.15$ para evitar colinealidad en las
+columnas de $\bH$ que causaría mal condicionamiento.
+
+\subsection{Estructura de $\bF$}
+
+El notebook soporta tres estructuras para la matriz de transición,
+siguiendo la taxonomía de los autores:
+
+\begin{table}[H]
+\centering
+\caption{Estructuras de $\bF$ disponibles}
+\small
+\begin{tabular}{lccl}
+\toprule
+\textbf{Tipo} & \textbf{Params.} & \textbf{Muestreo} & \textbf{Referencia} \\
+\midrule
+\texttt{'diagonal'} & $k$ & Normal conjugada truncada & Caldeira et al.\ (2010) P7 \\
+\texttt{'triangular'} & $k(k+1)/2$ & Diagonal conjugada + MH off-diag & Extensión propia \\
+\texttt{'completa'} & $k^2$ & MH matricial & VAR(1) irrestricto \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+La especificación diagonal está respaldada empíricamente: los autores
+reportan una diferencia de RMSE $< 0.4\,\text{pb}$ entre la especificación
+diagonal (P7) y el VAR completo (P6), mientras que los autores
+la adopta explícitamente por su parsimonia.
+
+% ══════════════════════════════════════════════════════════════
+\section{Forward Filter Backward Sampler (FFBS)}
+% ══════════════════════════════════════════════════════════════
+
+\subsection{¿Por qué FFBS y no muestreo univariado?}
+
+En el Gibbs sampler para modelos espacio-estado, la opción más simple
+sería muestrear cada $\bbet_t$ condicionado en sus vecinos $\bbet_{t-1}$
+y $\bbet_{t+1}$. Este enfoque produce cadenas con \textbf{autocorrelación
+extremadamente alta} porque los estados adyacentes están fuertemente
+correlacionados en la posterior.
+
+El algoritmo FFBS de los autores muestrea \textbf{la trayectoria
+completa $\bbet_{1:T}$ en una sola pasada}, lo que equivale a muestrear
+directamente de la distribución condicional conjunta y elimina la
+autocorrelación interna entre estados.
+
+\subsection{Algoritmo completo}
+
+\begin{algoritmo}[FFBS — Carter \& Kohn (1994)]
+\label{alg:ffbs}
+Dado $\bm{\theta} = (\bmu, \bF, \bQ, \bR, \btau)$, muestrear
+$\bbet_{1:T} \sim p(\bbet_{1:T} \mid \bY, \bm{\theta})$.
+
+\textbf{Fase forward (Kalman Filter):} Para $t = 1, \ldots, T$:
+\begin{align}
+  \hat{\bbet}_{t|t-1} &= \bmu + \bF(\hat{\bbet}_{t-1|t-1} - \bmu) \label{eq:pred_state}\\
+  \bP_{t|t-1} &= \bF\,\bP_{t-1|t-1}\,\bF^\top + \bQ \label{eq:pred_cov}\\
+  \bm{v}_t &= \by_t - \bH\,\hat{\bbet}_{t|t-1} \label{eq:innov}\\
+  \bS_t &= \bH\,\bP_{t|t-1}\,\bH^\top + \bR \label{eq:innov_var}\\
+  \bK_t &= \bP_{t|t-1}\,\bH^\top\,\bS_t^{-1} \label{eq:kalman_gain}\\
+  \hat{\bbet}_{t|t} &= \hat{\bbet}_{t|t-1} + \bK_t\,\bm{v}_t \label{eq:update_state}\\
+  \bP_{t|t} &= (\bI - \bK_t\bH)\,\bP_{t|t-1}\,(\bI - \bK_t\bH)^\top + \bK_t\bR\bK_t^\top
+  \label{eq:update_cov}
+\end{align}
+
+\textbf{Fase backward (muestreo):} Muestrear $\bbet_T \sim \N(\hat{\bbet}_{T|T},\, \bP_{T|T})$.
+Para $t = T-1, \ldots, 1$:
+\begin{align}
+  \bP_{t+1|t} &= \bF\,\bP_{t|t}\,\bF^\top + \bQ \label{eq:pred_ahead}\\
+  \bG_t &= \bP_{t|t}\,\bF^\top\,\bP_{t+1|t}^{-1} \label{eq:smooth_gain}\\
+  \bm{\mu}_{t|T} &= \hat{\bbet}_{t|t}
+    + \bG_t\!\left(\bbet_{t+1} - \hat{\bbet}_{t+1|t}\right) \label{eq:smooth_mean}\\
+  \bm{\Sigma}_{t|T} &= \bP_{t|t} - \bG_t\,\bP_{t+1|t}\,\bG_t^\top \label{eq:smooth_cov}\\
+  \bbet_t &\sim \N\!\left(\bm{\mu}_{t|T},\, \bm{\Sigma}_{t|T}\right) \label{eq:back_sample}
+\end{align}
+\end{algoritmo}
+
+\begin{notabox}[Forma Joseph (ecuación \ref{eq:update_cov})]
+La actualización de covarianza usa la forma Joseph
+$(I-KH)P(I-KH)^\top + KRK^\top$ en lugar de la forma estándar $(I-KH)P$.
+Aunque más costosa computacionalmente, garantiza que $\bP_{t|t}$ permanezca
+simétrica definida positiva incluso con errores de redondeo acumulados,
+lo que es crítico en series largas.
+\end{notabox}
+
+\subsection{Inicialización estacionaria}
+
+La condición inicial $\bP_{0|0}$ se obtiene resolviendo la ecuación de
+Lyapunov discreta $\bP = \bF\bP\bF^\top + \bQ$. Para $\bF$ diagonal,
+la solución es explícita por factor:
+\begin{equation}
+  P_{0,ii} = \frac{q_i}{1 - f_i^2}, \qquad i = 1,\ldots,k
+  \label{eq:lyapunov}
+\end{equation}
+
+\subsection{Implementación en Python}
+
+La función central \texttt{\_ffbs\_diag()} está compilada con Numba JIT
+para $\bF$ diagonal. El wrapper público \texttt{ffbs()} acepta cualquier $k$:
+
+\begin{codigocaja}{Celda 3 — \texttt{ffbs()} (extracto clave)}
+\begin{lstlisting}
+def ffbs(mu, f_vec, q_vec, r_vec, H, yields):
+    '''Wrapper publico de FFBS para F diagonal.
+    Valido para k=3 (DNS) y k=4 (DNSS).'''
+    return _ffbs_diag(
+        np.asarray(mu,     dtype=np.float64),
+        np.asarray(f_vec,  dtype=np.float64),  # diag(F)
+        np.asarray(q_vec,  dtype=np.float64),  # diag(Q)
+        np.asarray(r_vec,  dtype=np.float64),  # diag(R)
+        np.asarray(H,      dtype=np.float64),  # (N, k)
+        np.asarray(yields, dtype=np.float64),  # (T, N)
+    )
+\end{lstlisting}
+\end{codigocaja}
+
+\begin{tipbox}[Velocidad]
+Con Numba JIT activo, \texttt{\_ffbs\_diag()} corre aproximadamente $8\times$
+más rápido que el equivalente Python puro. Para $T=300$, $N=8$, $k=4$,
+el tiempo por iteración es $\approx 2\,\text{ms}$, lo que hace factibles
+$5{,}000$ iteraciones en $\approx 10\,\text{s}$ por cadena.
+\end{tipbox}
+
+% ══════════════════════════════════════════════════════════════
+\section{Distribuciones posteriores conjugadas}
+% ══════════════════════════════════════════════════════════════
+
+La elegancia del Gibbs sampler para este modelo radica en que,
+\emph{condicionado en la trayectoria $\bbet_{1:T}$} (muestreada por FFBS),
+todos los demás parámetros tienen posteriors analíticas exactas.
+
+\subsection[Posterior de $\mu_i$ y $f_i$ (Normal conjugada)]{Posterior de $\bmu$ y $f_i$ (Normal conjugada)}
+
+El modelo de transición para el factor $i$ es:
+$\beta_{i,t} = \mu_i + f_i(\beta_{i,t-1} - \mu_i) + \eta_{i,t}$,
+que puede reescribirse como:
+\begin{equation}
+  \beta_{i,t} - f_i\beta_{i,t-1} = (1 - f_i)\mu_i + \eta_{i,t}
+\end{equation}
+
+\begin{teoremabox}{Posterior de $\mu_i$ dado $f_i$}
+Con prior $\mu_i \sim \N(m_{0i},\, V_{0i})$ y definiendo
+$\ell_{i,t} \equiv \beta_{i,t} - f_i\,\beta_{i,t-1}$:
+\begin{equation}
+  \mu_i \mid f_i, \bbet, q_i \;\sim\;
+  \N\!\left(\bar{m}_i,\; \bar{V}_i\right)
+\end{equation}
+\begin{equation}
+  \bar{V}_i^{-1} = \frac{1}{V_{0i}} + \frac{(1-f_i)^2\,T_\text{eff}}{q_i},
+  \qquad
+  \bar{m}_i = \bar{V}_i\!\left(\frac{m_{0i}}{V_{0i}}
+    + \frac{1-f_i}{q_i}\sum_{t=1}^{T_\text{eff}}\ell_{i,t}\right)
+  \label{eq:post_mu}
+\end{equation}
+donde $T_\text{eff} = T - 1$.
+\end{teoremabox}
+
+\begin{teoremabox}{Posterior de $f_i$ dado $\mu_i$ (Normal truncada)}
+Definiendo $a_{i,t} = \beta_{i,t} - \mu_i$:
+\begin{equation}
+  f_i \mid \mu_i, \bbet, q_i \;\sim\;
+  \TN_{(-1,1)}\!\left(\bar{f}_i,\; \bar{V}_{f_i}\right)
+\end{equation}
+\begin{equation}
+  \bar{V}_{f_i}^{-1} = \frac{1}{V_{f_{0i}}} + \frac{\sum_t a_{i,t-1}^2}{q_i},
+  \qquad
+  \bar{f}_i = \bar{V}_{f_i}\!\left(\frac{f_{0i}}{V_{f_{0i}}}
+    + \frac{\sum_t a_{i,t}\,a_{i,t-1}}{q_i}\right)
+  \label{eq:post_f}
+\end{equation}
+La truncación en $(-1, 1)$ garantiza la estacionariedad del proceso AR(1)
+de cada factor. Se muestrea via la transformación de percentil de la
+Normal truncada (\texttt{scipy.stats.truncnorm}).
+\end{teoremabox}
+
+\begin{observacion}
+El muestreo se hace \emph{secuencialmente} por factor ($i = 1,\ldots,k$)
+en el orden $\mu_i \to f_i$, actualizando el valor de $\mu_i$ antes
+de muestrear $f_i$. Esto es el \emph{Gibbs dentro de Gibbs} y garantiza
+que los dos parámetros sean consistentes en cada iteración.
+\end{observacion}
+
+\subsection{Posterior de $q_i$ (Inverse-Gamma conjugada)}
+
+Los residuos de estado son $\eta_{i,t} = \beta_{i,t} - \mu_i - f_i(\beta_{i,t-1} - \mu_i)$.
+
+\begin{teoremabox}{Posterior de $q_i$}
+Con prior $q_i \sim \IG(a_0, b_0)$:
+\begin{equation}
+  q_i \mid \bbet, \mu_i, f_i \;\sim\;
+  \IG\!\left(a_0 + \frac{T_\text{eff}}{2},\;\;
+    b_0 + \frac{1}{2}\sum_{t=1}^{T_\text{eff}}\eta_{i,t}^2\right)
+  \label{eq:post_q}
+\end{equation}
+\end{teoremabox}
+
+\subsection{Posterior de $r_n$ (Inverse-Gamma conjugada)}
+
+Los residuos de medición son $\varepsilon_{n,t} = y_{t,n} - \bH_n\,\bbet_t$.
+
+\begin{teoremabox}{Posterior de $r_n$}
+Con prior $r_n \sim \IG(a_0, b_0)$:
+\begin{equation}
+  r_n \mid \bbet, \bY \;\sim\;
+  \IG\!\left(a_0 + \frac{T}{2},\;\;
+    b_0 + \frac{1}{2}\sum_{t=1}^{T}\varepsilon_{n,t}^2\right)
+  \label{eq:post_r}
+\end{equation}
+\end{teoremabox}
+
+\subsection{Extensiones: Opciones A y C}
+
+\subsubsection{Opción A — $\bR$ estructurada por grupos de plazos}
+
+En lugar de estimar $N$ varianzas independientes, se reducen a 3 parámetros
+correspondiendo a grupos de plazos (corto/medio/largo). La posterior por grupo $g$
+recoge los residuos de todos los plazos $n \in \mathcal{G}_g$:
+
+\begin{equation}
+  r_g \mid \bbet, \bY \;\sim\;
+  \IG\!\left(a_0 + \frac{T\,|\mathcal{G}_g|}{2},\;\;
+    b_0 + \frac{1}{2}\sum_{n \in \mathcal{G}_g}\sum_{t=1}^T\varepsilon_{n,t}^2\right)
+  \label{eq:post_r_groups}
+\end{equation}
+
+Esto impone una estructura parsimoniosa en $\bR$ que refleja el hecho
+conocido de que la liquidez y los errores de medición varían sistemáticamente
+por tramo de curva.
+
+\subsubsection{Opción C — Pesos en la posterior de $\bR$}
+
+Asignar peso $w_n > 1$ a un plazo $n$ equivale a reducir el hiperparámetro
+$b_0$ efectivo, lo que hace que la posterior concentre más masa en valores
+pequeños de $r_n$ (menor varianza de medición → mejor ajuste):
+
+\begin{equation}
+  r_n^{(w)} \mid \bbet, \bY \;\sim\;
+  \IG\!\left(a_0 + \frac{T}{2},\;\;
+    \frac{b_0}{w_n} + \frac{1}{2}\sum_{t=1}^T\varepsilon_{n,t}^2\right)
+  \label{eq:post_r_weighted}
+\end{equation}
+
+% ══════════════════════════════════════════════════════════════
+\section[Metropolis-Hastings para $\tau$]{Metropolis-Hastings para $\btau$}
+% ══════════════════════════════════════════════════════════════
+
+\subsection{¿Por qué MH y no posterior conjugada?}
+
+El parámetro $\btau$ entra de forma \emph{no lineal} en la matriz de cargas
+$\bH(\btau)$ — aparece en exponenciales y cocientes — por lo que no existe
+familia conjugada. Se usa el algoritmo Metropolis-Hastings, que solo requiere
+evaluar la función objetivo (la log-verosimilitud marginal) en la propuesta.
+
+\subsection{Log-verosimilitud marginal para MH}
+
+Al proponer un nuevo $\btau^*$, es incorrecto evaluar la log-verosimilitud
+con la trayectoria $\bbet_{1:T}$ que fue muestreada bajo el $\btau$ anterior:
+esa trayectoria es inconsistente con el nuevo valor propuesto.
+La solución es usar la \textbf{log-verosimilitud marginal} $p(\bY \mid \btau^*, \bm{\theta})$
+donde $\bbet_{1:T}$ está integrado vía el Filtro de Kalman:
+
+\begin{equation}
+  \log p(\bY \mid \btau, \bm{\theta})
+  = -\frac{TN}{2}\log(2\pi)
+    - \frac{1}{2}\sum_{t=1}^T \left[\log|\bS_t| + \bm{v}_t^\top \bS_t^{-1} \bm{v}_t\right]
+  \label{eq:marginal_loglik}
+\end{equation}
+
+donde $\bm{v}_t$ y $\bS_t$ son la innovación y su varianza del KF con $\bH(\btau)$.
+El $\log|\bS_t|$ se calcula via descomposición de Cholesky:
+$\log|\bS_t| = 2\sum_n \log L_{t,nn}$, lo que es numéricamente estable
+incluso cuando $\bS_t$ está mal condicionada.
+
+\subsection{Propuesta y ratio de aceptación}
+
+\begin{teoremabox}{MH para $\tau$ — Propuesta random walk en log-escala}
+Para garantizar positividad sin truncar el espacio:
+\begin{align}
+  \text{DNS:} &\quad \log\tau_1^* = \log\tau_1 + \sigma_1\,z, \quad z \sim \N(0,1) \\
+  \text{DNSS:} &\quad
+    \begin{pmatrix}\log\tau_1^*\\\log\tau_2^*\end{pmatrix} =
+    \begin{pmatrix}\log\tau_1\\\log\tau_2\end{pmatrix} +
+    \begin{pmatrix}\sigma_1 z_1\\\sigma_2 z_2\end{pmatrix}, \quad
+    z_1, z_2 \overset{iid}{\sim} \N(0,1)
+\end{align}
+
+Ratio de aceptación ($\alpha = \min(1, e^{\log\alpha})$):
+\begin{equation}
+  \log\alpha = \underbrace{
+    \left[\log p(\bY \mid \btau^*, \bm{\theta}) - \log p(\bY \mid \btau, \bm{\theta})\right]
+  }_{\text{ratio log-lik}} +
+  \underbrace{
+    \left[\log p(\btau^*) - \log p(\btau)\right]
+  }_{\text{ratio prior}}
+  \label{eq:mh_ratio}
+\end{equation}
+
+El Jacobiano del cambio $\log\tau \to \tau$ cancela porque la propuesta
+es simétrica en log-escala.
+\end{teoremabox}
+
+\begin{observacion}
+La propuesta independiente en log-escala para $(log\tau_1^*, \log\tau_2^*)$
+es equivalente a un MH 2D con propuesta diagonal. La tasa óptima de
+aceptación es $\approx 44\%$ para $d=1$ y $\approx 23\%$ para $d=2$
+según los autores.
+\end{observacion}
+
+\subsection{Adaptación durante el burn-in}
+
+Durante el burn-in, $\sigma$ se ajusta cada $n_\text{burnin}/5$ iteraciones:
+\begin{equation}
+  \sigma \leftarrow
+  \begin{cases}
+    0.70\,\sigma & \text{si } \hat{r} < r_\text{target} - 0.12 \\
+    1.35\,\sigma & \text{si } \hat{r} > r_\text{target} + 0.15 \\
+    \sigma        & \text{en otro caso}
+  \end{cases}
+  \label{eq:adapt_sigma}
+\end{equation}
+con $r_\text{target} = 0.40$ (DNS) y $r_\text{target} = 0.28$ (DNSS),
+y $\sigma$ acotado en $[0.005, 0.60]$.
+
+% ══════════════════════════════════════════════════════════════
+\section{Especificación de priors}
+% ══════════════════════════════════════════════════════════════
+
+Los priors siguen la filosofía \emph{débilmente informativos} de
+los autores y los autores: centrados en
+valores económicamente plausibles pero lo suficientemente difusos
+para que los datos dominen.
+
+\begin{table}[H]
+\centering
+\caption{Especificación de priors — función \texttt{make\_priors()}}
+\label{tab:priors}
+\small
+\begin{tabular}{L{3cm} L{3.8cm} L{7cm}}
+\toprule
+\textbf{Parámetro} & \textbf{Prior} & \textbf{Justificación} \\
+\midrule
+$f_i$ & $\TN_{(-1,1)}(0.90,\,0.10^2)$ &
+  Alta persistencia típica en DNS; truncación garantiza estacionariedad \\
+\addlinespace
+$\mu_i$ & $\N(m_{0i},\,25)$ &
+  Difuso; centrado en valores históricos plausibles ($\mu_0 \approx 5\%$, $\mu_1 \approx -2\%$) \\
+\addlinespace
+$q_i,\,r_n$ & $\IG(0.01,\,0.01)$ &
+  Casi no-informativo (Jeffreys-like); permite que los datos dominen la escala \\
+\addlinespace
+$\tau_1$ (uniforme) & $\mathcal{U}(0.15,\,5.0)$ &
+  Bounds económicos; hump en $[0.27, 9.0]$ años \\
+\addlinespace
+$\tau_1$ (normal) & $\N(1.78,\,0.40^2)$ &
+  Informativo; hump esperado en $\approx 3.2$ años (típico Tesoros EEUU) \\
+\addlinespace
+$\tau_2$ (normal) & $\N(0.60,\,0.08^2)$ &
+  Fuertemente informativo; evita colinealidad con $\tau_1$ en plazos cortos \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{codigocaja}{Celda 7 — \texttt{make\_priors()} con prior normal informativos}
+\begin{lstlisting}
+# Prior uniforme (difuso)
+priors = make_priors('DNSS', prior_tau_type='uniforme')
+
+# Prior normal informativos para tau (cuando se conoce el regimen)
+priors = make_priors('DNSS', prior_tau_type='normal',
+                     tau1_mu=1.78, tau1_sd=0.40,   # hump beta2 en ~3.2Y
+                     tau2_mu=0.60, tau2_sd=0.08)   # hump beta3 en ~1.1Y
+\end{lstlisting}
+\end{codigocaja}
+
+% ══════════════════════════════════════════════════════════════
+\section{Diagnósticos de convergencia MCMC}
+% ══════════════════════════════════════════════════════════════
+
+\subsection{Estadístico $\hat{R}$ de Gelman-Rubin}
+
+El $\hat{R}$  compara la varianza \emph{dentro} de cadenas
+($W$) con la varianza \emph{entre} cadenas ($B$). Si las cadenas han convergido a
+la misma distribución, $\hat{R} \approx 1$.
+
+\begin{teoremabox}{$\hat{R}$ de Gelman-Rubin}
+Con $m$ cadenas de longitud $n$ cada una, para un parámetro escalar $\psi$:
+\begin{align}
+  B &= \frac{n}{m-1}\sum_{j=1}^m (\bar{\psi}_j - \bar{\psi})^2
+  \quad \text{(varianza entre cadenas)} \\
+  W &= \frac{1}{m}\sum_{j=1}^m s_j^2
+  \quad \text{(varianza dentro de cadenas)} \\
+  \widehat{\Var{\psi \mid Y}} &= \frac{n-1}{n}W + \frac{B}{n} \\
+  \hat{R} &= \sqrt{\frac{\widehat{\Var{\psi \mid Y}}}{W}}
+  \label{eq:rhat}
+\end{align}
+
+\textbf{Criterios de convergencia:}
+\begin{itemize}[noitemsep]
+  \item $\hat{R} < 1.05$: convergencia excelente (\texttt{OK})
+  \item $\hat{R} < 1.10$: convergencia aceptable (\texttt{\textasciitilde})
+  \item $\hat{R} \geq 1.10$: no convergió — extender iteraciones (\texttt{XX})
+\end{itemize}
+\end{teoremabox}
+
+\subsection{Effective Sample Size (ESS)}
+
+La autocorrelación en las muestras MCMC reduce el número efectivo de
+muestras independientes. El ESS corrige por esta autocorrelación:
+
+\begin{equation}
+  \text{ESS} = \frac{n}{1 + 2\sum_{k=1}^{\infty}\hat{\rho}_k}
+  \label{eq:ess}
+\end{equation}
+
+donde $\hat{\rho}_k$ es la autocorrelación estimada en lag $k$.
+La suma se trunca cuando $|\hat{\rho}_k| < 0.05$.
+
+\begin{table}[H]
+\centering
+\caption{Interpretación del ESS}
+\small
+\begin{tabular}{cl}
+\toprule
+\textbf{ESS} & \textbf{Interpretación} \\
+\midrule
+$> 400$ & Buena precisión de Monte Carlo \\
+$100$--$400$ & Aceptable; considerar más iteraciones \\
+$< 100$ & Mezcla pobre; aumentar \texttt{n\_iter} o aplicar thinning \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Visualizaciones de diagnóstico}
+
+El notebook genera tres bloques de diagnóstico MCMC:
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Traceplots} (\texttt{plot\_traceplots}): evolución de los parámetros
+        por iteración. Una cadena bien mezclada debe explorar el espacio,
+        solaparse entre cadenas y no tener tendencia sistemática.
+  \item \textbf{ACF de la cadena} (\texttt{plot\_acf\_mcmc}): función de
+        autocorrelación de las muestras. Un decaimiento rápido a cero indica
+        buena mezcla. Se reporta el ESS por parámetro.
+  \item \textbf{Distribuciones posteriores} (\texttt{plot\_posteriors}):
+        histogramas con KDE, media posterior, e intervalo de credibilidad al 95\%.
+\end{enumerate}
+
+% ══════════════════════════════════════════════════════════════
+\section{Documentación de funciones}
+% ══════════════════════════════════════════════════════════════
+
+\subsection{Funciones de cargas}
+
+\begin{codigocaja}{Celda 2 — Cargas NS y NSS}
+\begin{lstlisting}
+def ns_loadings(maturities, tau1):
+    '''Cargas Nelson-Siegel. Shape (N, 3). [nivel, pendiente, curvatura]'''
+    m  = np.asarray(maturities, dtype=float)
+    mt = m / tau1; e = np.exp(-mt); c = (1.0 - e) / mt
+    return np.column_stack([np.ones_like(m), c, c - e])
+
+def nss_loadings(maturities, tau1, tau2):
+    '''Cargas Nelson-Siegel-Svensson. Shape (N, 4).
+    Condicion: |tau1 - tau2| >= 0.15 para evitar colinealidad.'''
+    m   = np.asarray(maturities, dtype=float)
+    mt1 = m/tau1; mt2 = m/tau2
+    e1  = np.exp(-mt1); e2 = np.exp(-mt2)
+    c1  = (1.0 - e1) / mt1
+    return np.column_stack([np.ones_like(m), c1, c1-e1, (1.0-e2)/mt2-e2])
+
+def get_H(maturities, tau1, tau2, model):
+    '''Wrapper unificado. model: "DNS" o "DNSS".'''
+    if model == 'DNS':
+        return ns_loadings(maturities, tau1)
+    return nss_loadings(maturities, tau1, tau2)
+\end{lstlisting}
+\end{codigocaja}
+
+\subsection{Posteriors conjugadas}
+
+\begin{codigocaja}{Celda 5 — Muestreo de $F$, $\mu$, $Q$, $R$}
+\begin{lstlisting}
+# F diagonal y mu — Normal conjugada
+f_new, mu_new = sample_F_mu_diagonal(
+    betas,                           # (T, k) trayectoria FFBS actual
+    f_vec, q_vec,                    # parametros actuales
+    prior_f_mean, prior_f_var,       # prior de f_i
+    prior_mu_mean, prior_mu_var)     # prior de mu_i
+
+# Q — Inverse-Gamma conjugada (por factor)
+q_new = sample_Q(betas, mu, f_vec, prior_Q_a, prior_Q_b)
+
+# R — libre: N varianzas independientes
+r_new = sample_R(yields, betas, H, prior_R_a, prior_R_b,
+                 obs_weights=None)   # obs_weights: Opcion C
+
+# R — grupos: 3 varianzas por tramo de curva (Opcion A)
+r_new = sample_R_groups(yields, betas, H, prior_R_a, prior_R_b,
+                         maturities,
+                         group_thresholds=(3.0, 10.0))
+\end{lstlisting}
+\end{codigocaja}
+
+\subsection{Metropolis-Hastings para $\tau$}
+
+\begin{codigocaja}{Celda 6 — MH para $\tau$}
+\begin{lstlisting}
+# DNS: MH 1D para tau1
+tau1, loglik_new, accepted = sample_tau_MH_dns(
+    tau1, yields, mu, f_vec, q_vec, r_vec,
+    maturities,
+    prop_std=0.08,            # sigma de la propuesta en log-escala
+    tau_bounds=(0.15, 5.0),   # limites del prior uniforme
+    prior_tau=('uniforme', 0.15, 5.0))
+
+# DNSS: MH 2D para (tau1, tau2)
+tau1, tau2, loglik_new, accepted = sample_tau_MH_dnss(
+    tau1, tau2, yields, mu, f_vec, q_vec, r_vec,
+    maturities,
+    prop_std=np.array([0.08, 0.06]),
+    tau_bounds=(0.15, 5.0),
+    prior_tau=('normal', 1.78, 0.40, 0.60, 0.08),
+    sep_min=0.15)             # separacion minima |tau1 - tau2|
+\end{lstlisting}
+\end{codigocaja}
+
+\subsection{Especificación de priors}
+
+\begin{codigocaja}{Celda 7 — \texttt{make\_priors()}}
+\begin{lstlisting}
+def make_priors(
+    model,                        # 'DNS' o 'DNSS'
+    prior_tau_type = 'uniforme',  # 'uniforme' o 'normal'
+    tau1_mu=1.78, tau1_sd=0.40,   # prior normal para tau1
+    tau2_mu=0.60, tau2_sd=0.08,   # prior normal para tau2 (DNSS)
+    tau_lo=0.15,  tau_hi=5.0,     # bounds del prior uniforme
+)
+# Retorna dict con:
+# 'prior_f_mean'  : (k,)   media prior de f_i
+# 'prior_f_var'   : (k,)   varianza prior de f_i
+# 'prior_mu_mean' : (k,)   media prior de mu_i
+# 'prior_mu_var'  : (k,)   varianza prior de mu_i
+# 'prior_Q_a/b'   : float  hiperparametros IG para Q
+# 'prior_R_a/b'   : float  hiperparametros IG para R
+# 'prior_tau'     : tuple  especificacion del prior de tau
+# 'tau_bounds'    : tuple  (tau_lo, tau_hi)
+\end{lstlisting}
+\end{codigocaja}
+
+\subsection{Una cadena: \texttt{run\_chain()}}
+
+\begin{codigocaja}{Celda 8 — \texttt{run\_chain()} (5 bloques del Gibbs)}
+\begin{lstlisting}
+def run_chain(
+    yields, maturities, priors,
+    n_iter, n_burnin, seed,
+    tau1_init=None,          # tau inicial (None -> OLS two-step)
+    tau2_init=None,
+    prop_std_init=None,      # sigma inicial del MH (None -> auto)
+    adapt_mh=True,           # adaptar sigma durante burn-in
+    obs_weights=None,        # (N,) Opcion C
+    r_mode='libre',          # 'libre' o 'grupos' (Opcion A)
+    group_thresholds=(3.0, 10.0),
+    verbose=False,
+):
+# Retorna dict con:
+# 'mu'    : (n_store, k)    muestras de mu
+# 'f_vec' : (n_store, k)    muestras de diag(F)
+# 'q_vec' : (n_store, k)    muestras de diag(Q)
+# 'r_vec' : (n_store, N)    muestras de diag(R)
+# 'tau1'  : (n_store,)      muestras de tau1
+# 'tau2'  : (n_store,)      muestras de tau2 (solo DNSS)
+# 'betas' : (n_store, T, k) trayectorias de factores
+# 'mh_final_rate' : float   tasa de aceptacion final MH
+# 'prop_std_final': array   sigma final adaptado
+\end{lstlisting}
+\end{codigocaja}
+
+\subsection{Multi-cadena: \texttt{run\_chains\_parallel()}}
+
+\begin{codigocaja}{Celda 9 — \texttt{run\_chains\_parallel()}}
+\begin{lstlisting}
+chains = run_chains_parallel(
+    yields, maturities, priors,
+    n_iter=3000, n_burnin=1000,
+    n_chains=4,              # >= 2 para calcular R-hat
+    n_jobs=-1,               # -1 = todos los nucleos disponibles
+    obs_weights=None,        # Opcion C
+    r_mode='libre',          # Opcion A
+    group_thresholds=(3.0, 10.0),
+    verbose=True,
+)
+# Retorna: lista de n_chains dicts (resultado de run_chain)
+\end{lstlisting}
+\end{codigocaja}
+
+\subsection{Diagnósticos}
+
+\begin{codigocaja}{Celda 9 — Diagnósticos de convergencia}
+\begin{lstlisting}
+# Tabla completa R-hat y ESS
+df_diag = compute_diagnostics(chains)
+print_diagnostics(chains)
+
+# R-hat para un parametro especifico
+rhat_tau1 = gelman_rubin(chains, 'tau1')
+rhat_f0   = gelman_rubin(chains, 'f_vec', idx=0)
+
+# ESS para una cadena
+ess = effective_sample_size(chains[0]['tau1'])
+\end{lstlisting}
+\end{codigocaja}
+
+\subsection{Visualizaciones MCMC}
+
+\begin{codigocaja}{Celdas 11--14 — Gráficos de diagnóstico}
+\begin{lstlisting}
+# Traceplots de todas las cadenas
+plot_traceplots(chains, titulo='(DNS)')
+
+# ACF de la cadena con ESS por parametro
+plot_acf_mcmc(chains, n_chain=0, max_lag=60)
+
+# Distribuciones posteriores con IC 95%
+plot_posteriors(chains, priors)
+
+# Posterior de tau y hump location
+plot_posterior_tau(chains, maturities)
+\end{lstlisting}
+\end{codigocaja}
+
+\subsection{Post-ajuste}
+
+\begin{codigocaja}{Celdas 15--16 — Factores y residuos}
+\begin{lstlisting}
+# Estadisticos de la distribucion posterior de beta_t
+beta_mean, beta_q025, beta_q975, beta_std = extract_posterior_betas(chains)
+# beta_mean  : (T, k)  media posterior  E[beta_t | Y]
+# beta_q025  : (T, k)  percentil 2.5%
+# beta_q975  : (T, k)  percentil 97.5%
+
+# Grafico de factores con bandas de credibilidad
+plot_factores_bayes(chains, dates)
+
+# Calcular ajuste y residuos con media posterior
+fit = compute_posterior_fit(chains, yields, maturities)
+print(f"RMSE = {fit['rmse_total']*100:.3f} pb")
+
+# Analisis de residuos (mismo formato que KF notebook)
+analisis_residuos_b(fit)
+plot_heatmap_residuos_b(fit)
+\end{lstlisting}
+\end{codigocaja}
+
+% ══════════════════════════════════════════════════════════════
+\section{Función principal \texttt{fit\_dns\_bayes()}}
+% ══════════════════════════════════════════════════════════════
+
+\subsection{Firma completa}
+
+\begin{codigocaja}{Celda 18 — Firma de \texttt{fit\_dns\_bayes()}}
+\begin{lstlisting}
+def fit_dns_bayes(
+    dates,                         # DatetimeIndex o array de fechas
+    yields,                        # (T, N) DataFrame o ndarray
+    maturities,                    # (N,) plazos en anos
+    # ── Modelo ─────────────────────────────────────────────────
+    model            = 'DNS',      # 'DNS' (k=3) o 'DNSS' (k=4)
+    # ── MCMC ───────────────────────────────────────────────────
+    n_iter           = 3000,       # total de iteraciones (incl. burn-in)
+    n_burnin         = 1000,       # iteraciones a descartar
+    n_chains         = 4,          # >= 2 para calcular R-hat
+    # ── Priors de tau ──────────────────────────────────────────
+    prior_tau_type   = 'uniforme', # 'uniforme' o 'normal'
+    tau1_mu          = 1.78,       # media prior normal tau1
+    tau1_sd          = 0.40,       # std prior normal tau1
+    tau2_mu          = 0.60,       # media prior normal tau2 (DNSS)
+    tau2_sd          = 0.08,       # std prior normal tau2 (DNSS)
+    tau_lo           = 0.15,       # bound inferior prior uniforme
+    tau_hi           = 5.0,        # bound superior prior uniforme
+    # ── MH ─────────────────────────────────────────────────────
+    prop_std_init    = None,       # sigma inicial propuesta MH (None=auto)
+    # ── Mejoras para plazos largos ──────────────────────────────
+    obs_weights      = None,       # (N,) Opcion C: pesos en posterior de R
+    r_mode           = 'libre',    # 'libre' o 'grupos' (Opcion A)
+    group_thresholds = (3.0, 10.0),# fronteras de grupos en anos
+    # ── Control ────────────────────────────────────────────────
+    plot             = True,       # generar todos los graficos
+    verbose          = True,       # imprimir progreso
+    n_jobs           = -1,         # nucleos para joblib
+)
+\end{lstlisting}
+\end{codigocaja}
+
+\subsection{Descripción de parámetros}
+
+\begin{longtable}{L{3.5cm} L{2cm} L{8.5cm}}
+\toprule
+\textbf{Parámetro} & \textbf{Default} & \textbf{Descripción} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\texttt{model} & \texttt{'DNS'} &
+  \texttt{'DNS'} para Nelson-Siegel ($k=3$) o \texttt{'DNSS'} para Svensson ($k=4$). \\
+\addlinespace
+\texttt{n\_iter} & 3000 &
+  Total de iteraciones MCMC incluyendo burn-in. Para análisis de producción
+  se recomiendan 5,000--10,000. \\
+\addlinespace
+\texttt{n\_burnin} & 1000 &
+  Iteraciones descartadas. Típicamente $\sim 30\%$ del total. \\
+\addlinespace
+\texttt{n\_chains} & 4 &
+  Número de cadenas paralelas. Mínimo 2 para calcular $\hat{R}$;
+  4 es el estándar en la literatura. \\
+\addlinespace
+\texttt{prior\_tau\_type} & \texttt{'uniforme'} &
+  \texttt{'uniforme'}: prior plano en \texttt{(tau\_lo, tau\_hi)}.
+  \texttt{'normal'}: prior normal informativo, útil cuando se conoce el
+  régimen de la curva. \\
+\addlinespace
+\texttt{obs\_weights} & \texttt{None} &
+  \textbf{Opción C.} Array $(N,)$ de pesos por plazo para la posterior de $R$.
+  \texttt{None} = todos iguales. Plazos con $w_n > 1$ reciben menor varianza
+  de medición → mejor ajuste. \\
+\addlinespace
+\texttt{r\_mode} & \texttt{'libre'} &
+  \textbf{Opción A.} \texttt{'libre'}: $N$ varianzas independientes.
+  \texttt{'grupos'}: 3 varianzas por grupos de plazos (corto/medio/largo). \\
+\addlinespace
+\texttt{group\_thresholds} & \texttt{(3.0, 10.0)} &
+  Fronteras de grupos en años para \texttt{r\_mode='grupos'}.
+  Default: corto $\leq 3$Y, medio $\leq 10$Y, largo $> 10$Y. \\
+\addlinespace
+\texttt{plot} & \texttt{True} &
+  Si \texttt{True}, genera automáticamente los 8 bloques de gráficos
+  (traceplots, ACF, posteriors, $\tau$, factores, curvas, heatmap, residuos). \\
+\end{longtable}
+
+\subsection{Estructura del retorno}
+
+La función retorna un diccionario con tres grupos de claves:
+
+\begin{codigocaja}{Estructura del dict de retorno}
+\begin{lstlisting}
+res = fit_dns_bayes(...)
+
+# ── Acceso a muestras MCMC ──────────────────────────────────
+res['chains']       # lista de n_chains dicts con muestras brutas
+res['priors']       # dict de priors usados
+
+# Concatenar muestras de todas las cadenas:
+tau1_samp = np.concatenate([ch['tau1'] for ch in res['chains']])
+f0_samp   = np.concatenate([ch['f_vec'][:,0] for ch in res['chains']])
+
+# ── Diagnosticos de convergencia ────────────────────────────
+res['diagnostics']  # pd.DataFrame con R-hat y ESS por parametro
+
+# ── Ajuste in-sample (media posterior) ──────────────────────
+res['fit']['beta_mean']    # (T, k)  factores latentes E[beta_t|Y]
+res['fit']['beta_q025']    # (T, k)  percentil 2.5% de beta_t
+res['fit']['beta_q975']    # (T, k)  percentil 97.5% de beta_t
+res['fit']['tau1_pm']      # float   media posterior de tau1
+res['fit']['tau2_pm']      # float   media posterior de tau2 (DNSS)
+res['fit']['fitted']       # (T, N)  rendimientos ajustados
+res['fit']['residuals']    # (T, N)  residuos de medicion
+res['fit']['rmse_total']   # float   RMSE total (mismas unidades que yields)
+res['fit']['rmse_mat']     # (N,)    RMSE por plazo
+\end{lstlisting}
+\end{codigocaja}
+
+% ══════════════════════════════════════════════════════════════
+\section{Ejemplos de uso}
+% ══════════════════════════════════════════════════════════════
+
+\subsection{Ejemplo 1 — DNS básico}
+
+\begin{codigocaja}{Uso mínimo — DNS con priors por defecto}
+\begin{lstlisting}
+import numpy as np
+import pandas as pd
+
+# Cargar datos (ajustar ruta)
+df = pd.read_csv("rendimientos.csv", parse_dates=["Date"])
+df = df.set_index("Date")
+yield_cols  = ["Y1", "Y2", "Y3", "Y5", "Y10", "Y20"]
+maturities  = np.array([1, 2, 3, 5, 10, 20], dtype=float)
+
+# Ajuste DNS bayesiano
+res = fit_dns_bayes(
+    dates      = df.index,
+    yields     = df[yield_cols].values,
+    maturities = maturities,
+    model      = 'DNS',
+    n_iter     = 3000,
+    n_burnin   = 1000,
+    n_chains   = 4,
+)
+print(f"RMSE = {res['fit']['rmse_total']*100:.3f} pb")
+
+# Extraer factores
+beta_t = res['fit']['beta_mean']     # (T, 3)
+nivel       = beta_t[:, 0]           # nivel (tasa de largo plazo)
+pendiente   = beta_t[:, 1]           # pendiente (spread)
+curvatura   = beta_t[:, 2]           # curvatura (joroba)
+
+# Incertidumbre sobre tau1
+tau1_samp = np.concatenate([ch['tau1'] for ch in res['chains']])
+print(f"tau1: media={tau1_samp.mean():.3f}  "
+      f"IC95%=[{np.percentile(tau1_samp,2.5):.3f}, "
+      f"{np.percentile(tau1_samp,97.5):.3f}]")
+\end{lstlisting}
+\end{codigocaja}
+
+\subsection{Ejemplo 2 — DNSS con prior informativo y mejoras para plazos largos}
+
+\begin{codigocaja}{DNSS con Opciones A y C + prior informativo}
+\begin{lstlisting}
+# Pesos extra a plazos >= 10 anos (Opcion C)
+mats    = np.array([1, 2, 3, 5, 10, 20], dtype=float)
+pesos   = np.where(mats >= 10, 2.0, 1.0)
+
+res = fit_dns_bayes(
+    dates       = df.index,
+    yields      = df[yield_cols].values,
+    maturities  = mats,
+    model       = 'DNSS',
+    n_iter      = 5000,
+    n_burnin    = 1500,
+    n_chains    = 4,
+    # Prior informativo (para curvas tipicas Tesoros EEUU):
+    prior_tau_type = 'normal',
+    tau1_mu=1.78, tau1_sd=0.40,    # hump beta2 en ~3.2Y
+    tau2_mu=0.60, tau2_sd=0.08,    # hump beta3 en ~1.1Y
+    # Opciones para plazos largos:
+    obs_weights      = pesos,          # Opcion C
+    r_mode           = 'grupos',       # Opcion A
+    group_thresholds = (3.0, 10.0),
+    plot = True,
+)
+\end{lstlisting}
+\end{codigocaja}
+
+\subsection{Ejemplo 3 — Comparativa bayesiano vs KF}
+
+\begin{codigocaja}{Comparativa usando los resultados de ambos notebooks}
+\begin{lstlisting}
+# Suponer que ya se tienen res_kf (del KF notebook)
+# y res_bayes (de este notebook)
+print("── Comparativa RMSE por plazo ──────────────────────────────")
+print(f"  {'Plazo':>5}  {'KF':>8}  {'Bayes':>8}  {'Delta':>8}")
+for i, m in enumerate(maturities):
+    r_kf    = res_kf['rmse_mat'][i]               * 100
+    r_bayes = res_bayes['fit']['rmse_mat'][i]      * 100
+    print(f"  {m:>4.0f}Y  {r_kf:>8.3f}  {r_bayes:>8.3f}  "
+          f"{r_bayes-r_kf:>+8.3f}")
+
+# Comparar incertidumbre de factores:
+# KF: IC basado en P_{t|T}[i,i]
+# Bayes: percentiles de muestras MCMC
+beta_mean, q025, q975, _ = extract_posterior_betas(res_bayes['chains'])
+bs_kf  = res_kf['beta_smoothed']
+Ps_kf  = res_kf['P_smoothed']
+
+# Ancho medio del intervalo de beta_0:
+ancho_bayes = (q975[:,0] - q025[:,0]).mean()
+ancho_kf    = (2 * 1.96 * np.sqrt(Ps_kf[:,0,0])).mean()
+print(f"\nAncho IC beta0:  KF={ancho_kf:.4f}   Bayes={ancho_bayes:.4f}")
+print("(Bayes es mas amplio: incorpora incertidumbre de theta y tau)")
+\end{lstlisting}
+\end{codigocaja}
+
+\subsection{Ejemplo 4 — Uso programático sin gráficos}
+
+\begin{codigocaja}{Modo silencioso para loops o backtesting}
+\begin{lstlisting}
+# Ajuste rapido sin graficos (para comparar multiples especificaciones)
+resultados = {}
+for modelo in ['DNS', 'DNSS']:
+    for tipo_prior in ['uniforme', 'normal']:
+        llave = f"{modelo}_{tipo_prior}"
+        res = fit_dns_bayes(
+            dates=df.index, yields=df[yield_cols].values,
+            maturities=mats,
+            model=modelo,
+            n_iter=2000, n_burnin=500, n_chains=2,
+            prior_tau_type=tipo_prior,
+            plot=False, verbose=False,
+        )
+        resultados[llave] = {
+            'rmse'  : res['fit']['rmse_total'] * 100,
+            'rhat_max': res['diagnostics']['Rhat'].max(),
+            'ess_min' : res['diagnostics']['ESS_min'].min(),
+        }
+
+for k, v in resultados.items():
+    print(f"  {k:<18}: RMSE={v['rmse']:.3f}pb  "
+          f"Rhat_max={v['rhat_max']:.3f}  ESS_min={v['ess_min']:.0f}")
+\end{lstlisting}
+\end{codigocaja}
+
+% ══════════════════════════════════════════════════════════════
+\section{Referencia completa de funciones}
+% ══════════════════════════════════════════════════════════════
+
+\begin{table}[H]
+\centering
+\caption{Todas las funciones del notebook en orden de dependencia}
+\small
+\rowcolors{2}{azulmuyclaro}{white}
+\begin{tabular}{L{4cm} L{2.5cm} L{7.5cm}}
+\toprule
+\rowcolor{azulprincipal}
+\color{white}\textbf{Función} & \color{white}\textbf{Retorno} & \color{white}\textbf{Descripción} \\
+\midrule
+\texttt{ns\_loadings(m, $\tau_1$)} & $(N,3)$ & Cargas Nelson-Siegel \\
+\texttt{nss\_loadings(m, $\tau_1$, $\tau_2$)} & $(N,4)$ & Cargas Svensson \\
+\texttt{get\_H(m, $\tau_1$, $\tau_2$, model)} & $(N,k)$ & Wrapper unificado \\
+\texttt{ols\_init\_tau(yields, m, model)} & float, float & $\tau$ inicial via OLS two-step \\
+\texttt{\_ffbs\_diag(...)} & $(T,k)$ & FFBS Numba JIT (F diagonal) \\
+\texttt{ffbs(...)} & $(T,k)$ & Wrapper público de FFBS \\
+\texttt{\_kf\_loglik\_diag(...)} & float & Log-lik marginal KF (JIT) \\
+\texttt{kf\_loglik(...)} & float & Wrapper público log-lik \\
+\texttt{sample\_F\_mu\_diagonal(...)} & $(k,)$, $(k,)$ & Posterior conjugada $F$, $\mu$ \\
+\texttt{sample\_Q(...)} & $(k,)$ & Posterior IG para $Q$ \\
+\texttt{sample\_R(...)} & $(N,)$ & Posterior IG para $R$ (libre) \\
+\texttt{sample\_R\_groups(...)} & $(N,)$ & Posterior IG para $R$ (grupos) \\
+\texttt{\_log\_prior\_tau(...)} & float & Log-prior de $\tau$ \\
+\texttt{sample\_tau\_MH\_dns(...)} & float, float, bool & MH 1D para $\tau_1$ \\
+\texttt{sample\_tau\_MH\_dnss(...)} & float, float, float, bool & MH 2D para $(\tau_1, \tau_2)$ \\
+\texttt{make\_priors(...)} & dict & Construye especificación de priors \\
+\texttt{initialize\_chain(...)} & dict & Inicialización OLS two-step \\
+\texttt{run\_chain(...)} & dict & Una cadena Gibbs completa \\
+\texttt{run\_chains\_parallel(...)} & list[dict] & Multi-cadena con joblib \\
+\texttt{gelman\_rubin(chains, key)} & float & Estadístico $\hat{R}$ \\
+\texttt{effective\_sample\_size(s)} & float & ESS de una serie \\
+\texttt{compute\_diagnostics(chains)} & DataFrame & Tabla $\hat{R}$ y ESS \\
+\texttt{print\_diagnostics(chains)} & — & Imprime tabla de diagnósticos \\
+\texttt{plot\_traceplots(chains)} & — & Traceplots por parámetro \\
+\texttt{plot\_acf\_mcmc(chains)} & — & ACF con ESS por parámetro \\
+\texttt{plot\_posteriors(chains)} & — & Histogramas posteriors \\
+\texttt{plot\_posterior\_tau(chains)} & — & Posterior $\tau$ y hump \\
+\texttt{extract\_posterior\_betas(chains)} & $(T,k)$ $\times\,4$ & Media, Q2.5\%, Q97.5\%, std \\
+\texttt{plot\_factores\_bayes(chains)} & — & Factores con IC bayesiano \\
+\texttt{compute\_posterior\_fit(chains)} & dict & Ajuste con media posterior \\
+\texttt{analisis\_residuos\_b(fit)} & — & Análisis completo de residuos \\
+\texttt{plot\_heatmap\_residuos\_b(fit)} & — & Heatmap residuos en el tiempo \\
+\texttt{fit\_dns\_bayes(...)} & dict & \textbf{Función principal} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ══════════════════════════════════════════════════════════════
+\section{Guía de decisiones}
+% ══════════════════════════════════════════════════════════════
+
+\begin{table}[H]
+\centering
+\caption{¿Cuándo usar cada opción?}
+\small
+\begin{tabular}{L{3.5cm} L{5.5cm} L{5cm}}
+\toprule
+\textbf{Situación} & \textbf{Configuración recomendada} & \textbf{Justificación} \\
+\midrule
+Análisis exploratorio & \texttt{n\_iter=1000, n\_chains=2} & Rápido, solo verificar convergencia \\
+\addlinespace
+Producción / publicación & \texttt{n\_iter=5000+, n\_chains=4} & $\hat{R} < 1.05$, ESS $> 400$ \\
+\addlinespace
+Curva con forma conocida & \texttt{prior\_tau='normal'} & Reduce exploración innecesaria de MH \\
+\addlinespace
+Curva con prima de plazo & \texttt{model='DNSS'} & Segundo factor de curvatura \\
+\addlinespace
+Residuos grandes en largo & \texttt{obs\_weights + r\_mode='grupos'} & Opciones A y C combinadas \\
+\addlinespace
+Datos de alta frecuencia & \texttt{r\_mode='grupos'} & Parsimonia, menos parámetros en $R$ \\
+\addlinespace
+Comparar con KF & \texttt{plot=True} + \texttt{plot\_comparativa\_bayes\_kf()} & Visualiza ganancia en incertidumbre \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ══════════════════════════════════════════════════════════════
+\section*{Referencias}
+% ══════════════════════════════════════════════════════════════
+\addcontentsline{toc}{section}{Referencias}
+
+\begin{itemize}[leftmargin=1.5em, itemsep=4pt]
+
+\item \textbf{Nelson, C.R. \& Siegel, A.F.} (1987).
+  Parsimonious Modeling of Yield Curves.
+  \textit{Journal of Business}, 60(4), 473--489.
+
+\item \textbf{Svensson, L.E.O.} (1994).
+  Estimating and Interpreting Forward Interest Rates: Sweden 1992--1994.
+  \textit{NBER Working Paper} No.\ 4871.
+
+\item \textbf{Diebold, F.X. \& Li, C.} (2006).
+  Forecasting the Term Structure of Government Bond Yields.
+  \textit{Journal of Econometrics}, 130(2), 337--364.
+
+\item \textbf{Carter, C.K. \& Kohn, R.} (1994).
+  On Gibbs Sampling for State Space Models.
+  \textit{Biometrika}, 81(3), 541--553.
+
+\item \textbf{Caldeira, J.F., Laurini, M.P. \& Portugal, M.S.} (2010).
+  Bayesian Inference Applied to Dynamic Nelson-Siegel Model.
+  \textit{Brazilian Review of Econometrics}, 30(1).
+
+\item \textbf{Çakmaklı, C.} (2013).
+  Modelling the Term Structure with a Bayesian Dynamic Nelson-Siegel Model.
+  Erasmus University Rotterdam Working Paper.
+
+\item \textbf{Gelman, A. \& Rubin, D.B.} (1992).
+  Inference from Iterative Simulation Using Multiple Sequences.
+  \textit{Statistical Science}, 7(4), 457--511.
+
+\item \textbf{Roberts, G.O. \& Rosenthal, J.S.} (2001).
+  Optimal Scaling for Various Metropolis-Hastings Algorithms.
+  \textit{Statistical Science}, 16(4), 351--367.
+
+\item \textbf{Hamilton, J.D.} (1994).
+  \textit{Time Series Analysis}. Princeton University Press.
+  Capítulo 13: State-Space Models and the Kalman Filter.
+
+\item \textbf{BIS} (2005).
+  Zero-Coupon Yield Curves: Technical Documentation.
+  \textit{BIS Papers} No.\ 25, Bank for International Settlements.
+
+\end{itemize}
+
+\end{document}
