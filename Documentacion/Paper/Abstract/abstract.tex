@@ -60,8 +60,8 @@
 
 
 % MARGENS ESQUERDA, DIREITA, SUPERIOR E INFERIOR
-\setlrmarginsandblock{2.5cm}{2cm}{*}
-\setulmarginsandblock{2cm}{2.3cm}{*}
+\setlrmarginsandblock{1.9cm}{1.4cm}{*}
+\setulmarginsandblock{1.4cm}{1.7cm}{*}
 \checkandfixthelayout
 
 % OUTROS ESPACAMENTOS
@@ -89,8 +89,8 @@
 
 % SECOES E SUBSECOES
 \titleformat*{\section}{\fontsize{11pt}{13.2pt}\bfseries}
-\titleformat*{\subsection}{\itshape}{\fontsize{11pt}{1.2pt}}
-\titleformat*{\subsubsection}{\itshape}{\fontsize{11pt}{1.0pt}}
+\titleformat*{\subsection}{\fontsize{11pt}{13.2pt}\itshape\selectfont}
+\titleformat*{\subsubsection}{\fontsize{11pt}{13.2pt}\itshape\selectfont}
 
 % REFERENCIAS
 \apptocmd{\thebibliography}{\justifying}{}{}
@@ -101,15 +101,9 @@
 
 \newcommand{\paginainicial}{1} % página inicial
 
-
-
-
 %----------autores tem que informar os dados AQUI----------
 \newcommand{\autorcabecalho}{Author1, F.~A.; Author2, Z.~Z.; Author3, R.;  Author4, S.~W.} % nomes dos autores no cabecalho
 \newcommand{\titulocabecalho}{} % titulo no cabecalho
-
-
-
 
 %---------------------------------------------------------%
 
@@ -121,15 +115,8 @@
 \makeoddhead{firstpage}{\hfill\fontfamily{phv}\scriptsize 35$^{\circ}$ Simposio Internacional de Estadística 2026 \\[0.15cm]
 \hfill Fecha: Julio 14 - Julio 17}{}{}
 
-
-
 \makeoddfoot{firstpage}{}{\fontfamily{phv}
 \footnotesize \selectfont \hspace{1cm} \Vhrulefill \hspace{0.65cm} \thepage \\ 35$^{\circ}$ Simposio Internacional de Estadística 2025 }
-
-
-
-
-
 
 
 % CABECALHO E RODAPE DAS DEMAIS PAGINAS
@@ -143,27 +130,26 @@
 %----------------------- OS AUTORES DEVEM INCLUIR AS INFORMAÇÕES ABAIXO-------------%
 
 % TITULO % Gustavo 19 maio
+% analisis dinamico de la Curva de REnd ......
+%
 
 \titulo{\fontsize{16pt}{19.2pt} \selectfont
-    \textbf{Modelando la Curva de Rendimientos en Colombia: DNS y DNSS bajo la Lupa Bayesiana y Frecuentista}  % titulo
+    \textbf{Comparación entre enfoques frecuentista y bayesiano en modelos Nelson-Siegel dinámicos para \textit{TES} en Colombia}  % titulo
 }
-\tituloestrangeiro{\fontsize{12pt}{18pt} \selectfont
-    \textit{\textbf{Modeling the Yield Curve in Colombia: DNS and DNSS Under Bayesian and Frequentist Lenses}} % titulo em inglês
+\vspace{-0.2cm}
+\tituloestrangeiro{\fontsize{10pt}{16pt} \selectfont
+    \textit{\textbf{Comparing frequentist and bayesian approaches in dynamic Nelson-Siegel models for Colombian \textit{TES}}} % titulo em inglês
 }
+\vspace{-0.2cm}
 
+% Autores: Nombre completo. Sobre los demás datos use abreviaturas, si es necesario, para mantener toda la información/descripción de cada autor en una sola línea.
 
-% AUTORES: Nome completo. Sobre os demais dados use abreveaturas, se necessário, para manter todas as informações/descrições,  de cada autor, em apenas uma  linha.  
-
-
-
-
-\autor{ \fontsize{13pt}{15.6pt} \selectfont
-    Juan David Garro\thanks{Est. Estadistica , UNAL - Med, E-mail: kgonzalezd@unal.edu.co}; % primer autor
-    Kevin Hair Gonzalez Duarte\thanks{Est. Ingeniería Administrativa , UNAL - Med, E-mail: jgarro@unal.edu.co}; % segundo autor}
-    Monica Andrea Arango Arango\thanks{Profesora Titular, UNAL - Med, E-mail: marango@unal.edu.co}; % tercer autor
-    \\
-    %\colorbox[rgb]{1,1,0}{autores enviar  informações completas - Mini currículo em português}
-   % Author 5\thanks{ Master student, Dept. Chemistry, USP, SP, Brazil; E-mail: author5@gmail.com}
+\autor{ \fontsize{11pt}{15.6pt} \selectfont
+    Kevin Hair Gonzalez Duarte\thanks{Est. Estadistica \& Ing. Sistemas , UNAL - Med, E-mail: kgonzalezd@unal.edu.co}; % primer autor
+    Juan David Garro Arboleda\thanks{Est. Ingeniería Administrativa \& Estadistica , UNAL - Med, E-mail: jgarro@unal.edu.co}; % segundo autor
+    Monica Andrea Arango Arango\thanks{Profesora Asociada, UNAL - Med, E-mail: marango@unal.edu.co} \\
+    René Iral Palomino\thanks{Profesor Asociado, UNAL - Med, E-mail: riral@unal.edu.co}
+    Julián Saavedra Echavarría\thanks{Estadístico - Est. de Maestría en Analítica, UNAL - Med, E-mail: jsaavedrae@unal.edu.co}; % primer autor
 }
 
 %---------------------------------------------------------%
@@ -186,7 +172,7 @@
 
 % TITULO E AUTORES
 \maketitle
-\vspace{-1.2cm}
+\vspace{-1.4cm}
 
 %Inserto imagen a la página
 %\thispagestyle{fancy}
@@ -198,57 +184,66 @@
 \hyphenation{} %  palavras sem quebras
 
 % RESUMO E PALAVRAS-CHAVE EM INGLES % Gustavo 19 maio
-\renewcommand{\resumoname}{\texorpdfstring{\fontsize{14pt}{16.8pt} \fontfamily{ptm} \selectfont \textbf{Resumen} \\[-0.3cm] \rule{0.91\textwidth}{0.5pt} \vspace{-0.5cm}}{Abstract}}
+\renewcommand{\resumoname}{\texorpdfstring{\fontsize{14pt}{16.8pt} \fontfamily{ptm} \selectfont \textbf{Resumen} \\[-0.3cm] \rule{0.91\textwidth}{0.3pt} \vspace{-0.3cm}}{Abstract}}
 \begin{resumoumacoluna}
     \normalsize
 
-Los Títulos de Tesorería (TES) constituyen el activo libre de riesgo y la columna vertebral del mercado de
-capitales colombiano. Aunque los modelos de la familia Nelson-Siegel son ampliamente utilizados para modelar
-su curva de rendimientos, la literatura tradicional suele fijar el parámetro de decaimiento ($\tau$) como una
-constante, omitiendo la naturaleza dinámica de la estructura temporal de tasas. Para cubrir esta brecha empírica, 
-este estudio contrasta rigurosamente la estimación de la curva cero-cupón mediante modelos de espacio de estados, 
-evaluando metodologías frecuentistas frente a estimaciones bayesianas puras. Metodológicamente, se construye un 
+
+
+Los Títulos de Tesorería (TES) constituyen la base del mercado de capitales colombiano y son el principal referente 
+de tasas libres de riesgo. Modelar adecuadamente su curva de rendimientos es fundamental para la valoración de activos y 
+la gestión de riesgos. Entre los enfoques más utilizados se encuentran los modelos de la familia Nelson-Siegel; sin embargo, 
+la mayoría de aplicaciones en la literatura asume que el parámetro de decaimiento ($\tau$), que controla la forma de la curva, 
+permanece constante en el tiempo. Esta simplificación ignora la naturaleza dinámica de los mercados financieros y puede limitar 
+la capacidad de ajuste de los modelos.
+\\
+
+
+Para cubrir esta brecha empírica, 
+este estudio contrasta la estimación de la curva cero-cupón mediante modelos de espacio de estados, 
+evaluando metodologías frecuentistas frente a estimaciones bayesianas puras. Se construye un 
 panel histórico de tasas spot mediante el método de bootstrapping de Fama-Bliss en seis nodos de vencimiento
 (entre 2 y 15 años). Sobre este panel, se extraen los factores latentes aplicando los modelos Dinámico de Nelson-Siegel
 (DNS) y Nelson-Siegel-Svensson (DNSS) bajo dos paradigmas: (1) un enfoque frecuentista basado en el Filtro de Kalman, 
 optimizando los parámetros $\tau$ a través de una búsqueda de grilla en ventana rodante, y (2) un enfoque Bayesiano 
 mediante el algoritmo de Muestreo de Gibbs, que estima conjuntamente los factores $\beta$ y $\tau$. El desempeño de 
 las metodologías se evalúa a través de métricas de bondad de ajuste. La hipótesis 
-central sugiere que la estimación dinámica de $\tau$ reduce significativamente los errores de pronóstico. Se anticipa 
-que el enfoque Bayesiano ofrezca una ventaja predictiva al capturar mejor la incertidumbre durante periodos volátiles,
-mientras que el Filtro de Kalman destaca por su eficiencia computacional y ajuste competitivo. Esta investigación proyecta consolidar un marco analítico superior frente a los modelos estáticos tradicionales, proveyendo herramientas robustas para la valoración de activos, gestión de riesgos y toma de decisiones en Colombia.
+central sugiere que la estimación dinámica de $\tau$ reduce significativamente los errores de ajuste. Se anticipa 
+que el enfoque Bayesiano ofrezca una ventaja al capturar mejor la incertidumbre durante periodos volátiles,
+mientras que el Filtro de Kalman destaca por su eficiencia computacional y ajuste competitivo. Este estudio 
+aporta evidencia empirica a favor de los modelos dinamicos, proveyendo herramientas robustas para 
+la valoración de activos, gestión de riesgos y toma de decisiones en Colombia.
 
 \vspace{0.4 cm}
-    \noindent \textbf{Palabras clave:} xxxxxxxxxxxxxxxx
+    \noindent \textbf{Palabras clave:} Renta fija, Curva de rendimientos, Nelson-Siegel, Modelos dinámicos, Enfoque bayesiano, Filtro de Kalman
+                                       Decaimiento dinámico, Modelos de espacio de estados.
 
 \end{resumoumacoluna}
 
 
 % RESUMO E PALAVRAS-CHAVE EM PORTUGUES % Gustavo 19 maio
-\renewcommand{\resumoname}{\texorpdfstring{\fontsize{14pt}{16.8pt} \fontfamily{ptm} \selectfont \textbf{Abstract} \\[-0.3cm] \rule{0.91\textwidth}{0.5pt} \vspace{-0.5cm}}{Resumo}}
+\renewcommand{\resumoname}{\texorpdfstring{\fontsize{14pt}{16.8pt} \fontfamily{ptm} \selectfont \textbf{Abstract} \\[-0.3cm] \rule{0.91\textwidth}{0.5pt} \vspace{-0.3cm}}{Resumo}}
 \begin{resumoumacoluna}
     \normalsize
-
-The Treasury Bonds (TES) are the risk-free asset and the backbone of the Colombian capital market. 
-Although the Nelson-Siegel family of models is widely used to model their yield curve, traditional 
-literature often fixes the decay parameter ($\tau$) as a constant, overlooking the dynamic nature of
-the term structure of rates. To fill this empirical gap, this study rigorously contrasts the estimation
-of the zero-coupon curve through state-space models, evaluating frequentist methodologies against pure
-Bayesian estimations. Methodologically, a historical panel of spot rates is constructed using the 
-Fama-Bliss bootstrapping method at six maturity nodes (between 2 and 15 years). On this panel, latent
-factors are extracted by applying Dynamic Nelson-Siegel (DNS) and Nelson-Siegel-Svensson (DNSS) models 
-under two paradigms: (1) a frequentist approach based on the Kalman Filter, optimizing $\tau$ parameters 
-through a grid search in a rolling window, and (2) a Bayesian approach using the Gibbs Sampling algorithm, 
-which jointly estimates $\beta$ and $\tau$ factors. The performance of the methodologies is evaluated through 
-goodness-of-fit metrics. The central hypothesis suggests that dynamic estimation of 
-$\tau$ significantly reduces forecasting errors. It is anticipated that the Bayesian approach will offer a 
-predictive advantage by better capturing uncertainty during volatile periods, while the Kalman Filter stands 
-out for its computational efficiency and competitive fit. This research projects to consolidate a superior 
-analytical framework compared to traditional static models, providing robust tools for asset valuation, risk 
-management, and decision-making in Colombia.   
+The Treasury Bonds (TES) are the basis of the Colombian capital market and are the main reference for risk-free rates. 
+Properly modeling their yield curve is fundamental for asset valuation and risk management. Among the most widely used 
+approaches are the models of the Nelson-Siegel family; however, most applications in the literature assume that the decay 
+parameter ($\tau$), which controls the shape of the curve, remains constant over time. This simplification ignores the dynamic
+nature of financial markets and may limit the models' fitting ability. 
+\\
+To fill this empirical gap, this study contrasts the estimation of the zero-coupon curve through state-space models,
+evaluating frequentist methodologies against pure Bayesian estimates. A historical panel of spot rates is constructed using
+the Fama-Bliss bootstrapping method at six maturity nodes (between 2 and 15 years). On this panel, latent factors are extracted by applying 
+the Dynamic Nelson-Siegel (DNS) and Nelson-Siegel-Svensson (DNSS) models under two paradigms: (1) a frequentist approach based on the Kalman 
+Filter, optimizing the $\tau$ parameters through a grid search in a rolling window, and (2) a Bayesian approach using the Gibbs Sampling algorithm, 
+which jointly estimates the $\beta$ and $\tau$ factors. The performance of the methodologies is evaluated through goodness-of-fit metrics. The central 
+hypothesis suggests that the dynamic estimation of $\tau$ significantly reduces fitting errors. It is anticipated that the Bayesian approach will offer
+ an advantage in better capturing uncertainty during volatile periods, while the Kalman Filter stands out for its computational efficiency and competitive 
+ fit. This study provides empirical evidence in favor of dynamic models, providing robust tools for asset valuation, risk management, and decision-making in Colombia.
 
 \vspace{0.4cm}
-    \noindent \textbf{Keywords:} xxxxxxxxxxxxxxxx
+    \noindent \textbf{Keywords:} Fixed income, Yield curve, Nelson-Siegel, Dynamic models, Bayesian approach,
+                                 Kalman Filter, Dynamic decay, State-space models.
 
 %---------------------------------------------------------
 \end{resumoumacoluna}

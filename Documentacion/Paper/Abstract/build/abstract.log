@@ -1,41 +1,30 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (MiKTeX 26.2) (preloaded format=xelatex 2026.4.14)  14 APR 2026 22:56
+This is XeTeX, Version 3.141592653-2.6-0.999998 (MiKTeX 26.2) (preloaded format=xelatex 2026.4.14)  20 APR 2026 17:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"C:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/Paper
-/Abstract/build/abstract.tex"
-
-(C:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/Paper/A
-bstract/build/abstract.tex
+**"c:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/Paper/Abstract/abstract.tex"
+(c:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/Paper/Abstract/abstract.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/abntex2\abntex2.cls
 Document Class: abntex2 2018/11/24 v-1.9.7 abnTeX2
 (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/memoir\memoir.cls
-Document Class: memoir 2025/11/04 v3.8.4b configurable book, report, article do
-cument class
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/xpatch\xpatch.sty
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/memoir\memoir.cls
+Document Class: memoir 2025/11/04 v3.8.4b configurable book, report, article document class
+(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/xpatch\xpatch.sty (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
 Package: expl3 2026-01-19 L3 programming layer (loader) 
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-xet
-ex.def
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-xetex.def
 File: l3backend-xetex.def 2025-10-09 L3 backend support: XeTeX
 \g__graphics_track_int=\count271
 \g__pdfannot_backend_int=\count272
 \g__pdfannot_backend_link_int=\count273
 ))
 Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\xpars
-e.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\xparse.sty
 Package: xparse 2025-10-09 L3 Experimental document command parser
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count274
 ))
@@ -44,13 +33,12 @@ Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
 \xlvchars=\skip51
 \@memcnta=\count275
 \c@@memmarkcntra=\count276
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 )
 \trimtop=\skip52
 \trimedge=\skip53
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/memoir\mem10.clo
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/memoir\mem10.clo
 File: mem10.clo 2022/07/29 v0.5 memoir class 10pt size option
 )
 \binding=\skip54
@@ -140,8 +128,7 @@ File: mem10.clo 2022/07/29 v0.5 memoir class 10pt size option
 \beforePoemTitleskip=\skip114
 \midPoemTitleskip=\skip115
 \afterPoemTitleskip=\skip116
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
 Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 \col@sep=\dimen153
 \ar@mcellbox=\box53
@@ -150,14 +137,11 @@ Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 \extratabsurround=\skip117
 \backup@length=\skip118
 \ar@cellbox=\box54
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/tools\dcolumn.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/tools\dcolumn.sty
 Package: dcolumn 2025/10/21 v1.06 decimal alignment package (DPC)
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/tools\delarray.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/tools\delarray.sty
 Package: delarray 2014/10/28 v1.01 array delimiter package (DPC)
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
 Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 \TX@col@width=\dimen155
 \TX@old@table=\dimen156
@@ -166,8 +150,7 @@ Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 \TX@delta=\dimen159
 \TX@cols=\count295
 \TX@ftn=\toks19
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen160
 \lightrulewidth=\dimen161
@@ -221,31 +204,22 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \afterepigraphskip=\skip131
 \epigraphwidth=\skip132
 \epigraphrule=\skip133
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2026-01-29 v2.58 Cross-referencing by name of section
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
 Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.s
-ty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
-))
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettit
-lestring.sty
+)) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks21
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 )))
 \c@section@level=\count306
@@ -327,8 +301,7 @@ Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
 \verbatimindent=\skip182
 \verbatim@out=\write3
  (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/base\shortvrb.sty
-Package: shortvrb 2024/12/25 v3.0q Standard LaTeX documentation package V3 (FMi
-)
+Package: shortvrb 2024/12/25 v3.0q Standard LaTeX documentation package V3 (FMi)
 )
 \bvboxsep=\skip183
 \c@memfbvline=\count312
@@ -390,37 +363,24 @@ Package tocbibind [2008/07/23] emulated by memoir.
 Package tocloft [2008/07/23] emulated by memoir.
 Package tocvsec2 [2008/07/23] emulated by memoir.
 Package verse [2008/07/23] emulated by memoir.
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/textcase\textcase.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/textcase\textcase.sty
 Package: textcase 2025/02/16 v1.05 Text only upper/lower case changing (DPC)
 Package textcase Info: Defining Legacy names on input line 20.
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2026-01-29 v7.01p Hypertext links for LaTeX
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefine
-keys.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.s
-ty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds
-.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
-)
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode not found.
-))
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+)) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.s
-ty
-Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
-)
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
 \@linkdim=\dimen193
 \Hy@linkcounter=\count333
@@ -443,21 +403,16 @@ Package hyperref Info: Backreferencing OFF on input line 4221.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks OFF on input line 4474.
 \c@Hy@tempcnt=\count336
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4807.
 \XeTeXLinkMargin=\dimen194
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc
-.sty
-Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
-)
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
 \Fld@menulength=\count337
 \Field@Width=\dimen195
@@ -474,62 +429,43 @@ Package hyperref Info: PDF/A mode OFF on input line 6114.
 \c@Hfootnote=\count340
 )
 Package hyperref Info: Driver (autodetected): hxetex.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hxetex.def
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hxetex.def
 File: hxetex.def 2026-01-29 v7.01p Hyperref driver for XeTeX
 \pdfm@box=\box58
 \c@Hy@AnnotLevel=\count341
 \HyField@AnnotCount=\count342
 \Fld@listcount=\count343
 \c@bookmark@seq@number=\count344
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfil
-echeck.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquec
-ounter.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
-84.
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
 )
 \Hy@SectionHShift=\skip191
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/memoir\memhfixc.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/memoir\memhfixc.sty
 Package: memhfixc 2025/09/16 v1.24 hyperref package fixes for memoir class
 \c@memhycontfloat=\count345
 \c@mem@Hpagenote=\count346
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
 Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-dvipdfm.de
-f
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-dvipdfm.def
 File: bkm-dvipdfm.def 2023-12-10 v1.31 bookmark driver for dvipdfm (HO)
 \BKM@id=\count347
 )) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
-Package: babel 2026/02/14 v26.3 The multilingual framework for LuaLaTeX, pdfLaT
-eX and XeLaTeX
+Package: babel 2026/02/14 v26.3 The multilingual framework for LuaLaTeX, pdfLaTeX and XeLaTeX
 \babel@savecnt=\count348
-LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input li
-ne 2078.
-LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input li
-ne 2080.
-LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input lin
-e 2082.
-LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input lin
-e 2083.
-LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) 
-on input line 2084.
-LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) 
-on input line 2086.
-LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) 
-on input line 2111.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding OT1) on input line 2078.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding OT1) on input line 2080.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding T1) on input line 2082.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding T1) on input line 2083.
+LaTeX Encoding Info:    Ignoring declaration for text command \ij (encoding ?) on input line 2084.
+LaTeX Encoding Info:    Ignoring declaration for text command \IJ (encoding ?) on input line 2086.
+LaTeX Encoding Info:    Ignoring declaration for text command \SS (encoding ?) on input line 2111.
 \U@D=\dimen197
 \l@unhyphenated=\language79
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/babel\xebabel.def)
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/babel\xebabel.def)
 \bbl@readstream=\read3
 \bbl@dirlevel=\count349
 Package babel Info: Configuration files are deprecated, as
@@ -540,18 +476,11 @@ Package babel Info: Configuration files are deprecated, as
 * Local config file bblopts.cfg used
 *
 (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
-File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
- babel
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/en\babel
--english.tex)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/invalid\
-babel-brazil.tex)
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of babel
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/en\babel-english.tex) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/invalid\babel-brazil.tex)
 Package babel Info: Importing font and identification data for english
 (babel)             from babel-en.ini. Reported on input line 4330.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\english.l
-df
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\english.ldf
 Language: english 2017/06/06 v3.3r English support from the babel system
 Package babel Info: Hyphen rules for 'canadian' set to \l@english
 (babel)             (\language0). Reported on input line 102.
@@ -567,15 +496,12 @@ Package babel Warning: Name 'brazil' is deprecated.
 
 Package babel Info: Importing font and identification data for brazil
 (babel)             from babel-pt-BR.ini. Reported on input line 4330.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/babel-portuges\brazilia
-n.ldf
+(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/babel-portuges\brazilian.ldf
 Language: portuges 2026/01/24 v1.2u Portuguese support from the babel system
 Package babel Info: Hyphen rules for 'brazil' set to \l@portuguese
 (babel)             (\language56). Reported on input line 100.
 Package babel Info: Making " an active character on input line 132.
-))
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
+)) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
 Package: enumitem 2025/02/06 v3.11 Customized lists
 \labelindent=\skip192
 \enit@outerparindent=\dimen198
@@ -583,8 +509,7 @@ Package: enumitem 2025/02/06 v3.11 Customized lists
 \enit@inbox=\box59
 \enit@count@id=\count350
 \enitdp@description=\count351
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
 Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
 \calc@Acount=\count352
 \calc@Bcount=\count353
@@ -648,29 +573,22 @@ Package inputenc Warning: inputenc package ignored with utf8 based engines.
 
 ) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
 Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
-6.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 116.
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-))
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\helvet.sty
+)) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\helvet.sty
 Package: helvet 2020/03/25 PSNFSS-v9.3 (WaS) 
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/tools\indentfirst.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/tools\indentfirst.sty
 Package: indentfirst 2023/07/02 v1.03 Indent first paragraph (DPC)
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
 Package: color 2025/01/14 v1.3e Standard LaTeX Color (DPC)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: xetex.def on input line 149.
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\xetex.def
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\xetex.def
 File: xetex.def 2025/11/01 v5.0p Graphics/color driver for xetex
-) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.lt
-x))
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx))
 
 Class memoir Warning: The fancyhdr package is not recommended with memoir.
 (memoir)              We have our own well integrated interface to handle
@@ -679,7 +597,6 @@ Class memoir Warning: The fancyhdr package is not recommended with memoir.
 
 (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
-
 \f@nch@headwidth=\skip258
 \f@nch@offset@elh=\skip259
 \f@nch@offset@erh=\skip260
@@ -695,11 +612,9 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 \f@nch@widthC=\skip270
 \f@nch@widthR=\skip271
 \@temptokenb=\toks28
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
 \Gm@cnth=\count363
@@ -714,27 +629,20 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layouthoffset=\dimen263
 \Gm@layoutvoffset=\dimen264
 \Gm@dimlist=\toks29
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
 Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
-fg
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: xetex.def on input line 106.
 )
 \Gin@req@height=\dimen265
 \Gin@req@width=\dimen266
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.sty
 Package: microtype 2026/03/01 v3.2d Micro-typographical refinements (RS)
 \MT@toks=\toks30
 \MT@tempbox=\box60
@@ -748,17 +656,14 @@ LaTeX Info: Redefining \textls on input line 1449.
 LaTeX Info: Redefining \microtypecontext on input line 2053.
 LaTeX Info: Redefining \textmicrotypecontext on input line 2070.
 \MT@listname@count=\count367
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype-xet
-ex.def
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype-xetex.def
 File: microtype-xetex.def 2026/03/01 v3.2d Definitions specific to xetex (RS)
 LaTeX Info: Redefining \lsstyle on input line 443.
 LaTeX Info: Redefining \lslig on input line 451.
 \MT@outer@space=\skip272
 )
 Package microtype Info: Loading configuration file microtype.cfg.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.cfg
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.cfg
 File: microtype.cfg 2026/03/01 v3.2d microtype main configuration file (RS)
 )
 LaTeX Info: Redefining \microtypesetup on input line 3065.
@@ -772,8 +677,7 @@ Package soulutf8 Warning: This package is obsolete,
 
 ) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/soul\soul.sty
 Package: soul 2026-03-06 v3.2 Permit use of UTF-8 characters in soul (HO)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/soul\soul-ori.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/soul\soul-ori.sty
 Package: soul-ori 2026-03-06 v3.2 letterspacing/underlining (mf)
 \SOUL@word=\toks32
 \SOUL@lasttoken=\toks33
@@ -795,8 +699,7 @@ Package: soul-ori 2026-03-06 v3.2 letterspacing/underlining (mf)
 \SOUL@ttwidth=\dimen274
 \SOUL@uldp=\dimen275
 \SOUL@ulht=\dimen276
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/etexcmds\etexcmds.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/etexcmds\etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\mathptmx.sty
 Package: mathptmx 2020/03/25 PSNFSS-v9.3 Times w/ Math, improved (SPQR, WaS) 
@@ -839,8 +742,7 @@ Class memoir Warning: The titlesec package is not recommended with memoir.
 (memoir)              With it we loose some of the features provides by the
 (memoir)              class. We provide our own interface to adjust how 
 (memoir)              sections and chapters should look like.
-(memoir)              See the manual sections 6.4 through 6.6 for details.  on 
-input line 24.
+(memoir)              See the manual sections 6.4 through 6.6 for details.  on input line 24.
 
 (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
 Package: titlesec 2025/01/04 v2.17 Sectioning titles
@@ -853,8 +755,7 @@ Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \titlewidth=\dimen279
 \titlewidthlast=\dimen280
 \titlewidthfirst=\dimen281
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/ragged2e\ragged2e.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/ragged2e\ragged2e.sty
 Package: ragged2e 2023/06/22 v3.6 ragged2e Package
 \CenteringLeftskip=\skip276
 \RaggedLeftLeftskip=\skip277
@@ -870,19 +771,16 @@ Package: ragged2e 2023/06/22 v3.6 ragged2e Package
 \RaggedLeftParindent=\skip287
 \RaggedRightParindent=\skip288
 \JustifyingParindent=\skip289
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count372
 \float@exts=\toks39
 \float@box=\box62
 \@float@everytoks=\toks40
 \@floatcapt=\box63
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@tempdima=\dimen282
 \captionmargin=\dimen283
@@ -893,11 +791,8 @@ Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@parindent=\dimen288
 \caption@hangindent=\dimen289
 Package caption Info: memoir document class detected.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption-memoir.
-sto
-File: caption-memoir.sto 2023/09/08 v2.2c Adaption of the caption package to th
-e memoir document class (AR)
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption-memoir.sto
+File: caption-memoir.sto 2023/09/08 v2.2c Adaption of the caption package to the memoir document class (AR)
 ))
 \c@caption@flags=\count373
 \c@continuedfloat=\count374
@@ -906,48 +801,39 @@ Package caption Info: changepage package is loaded.
 \caption@adjustwidth@linewidth=\dimen291
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/abntex2\abntex2cite.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/abntex2\abntex2cite.sty
 Package: abntex2cite 2018/11/24 v-1.9.7 abnTeX2
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/abntex2\abntex2abrev.st
-y)
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/abntex2\abntex2abrev.sty)
 \minimumbiblabelwidth=\skip290
 \ABCIauxlen=\skip291
 \c@ABCIaux=\count375
 \c@ABCImax=\count376
  (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifpdf.sty
 Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifxetex.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifxetex.sty
 Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/relsize\relsize.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/relsize\relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
 \biblabelsep=\skip292
 LaTeX Info: Redefining \newblock on input line 591.
 LaTeX Info: Redefining \cite on input line 618.
 \ABCItoken=\toks41
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2025/07/09 v2.17z AMS math features
 \@mathmargin=\skip293
 
 For additional information on amsmath, use the `?' option.
 (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
 Package: amstext 2024/11/17 v2.01 AMS text
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks42
 \ex@=\dimen292
-))
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+)) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen293
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count377
@@ -997,11 +883,9 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \mathdisplay@stack=\toks46
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup6
 \symAMSb=\mathgroup7
@@ -1018,36 +902,28 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@postskip=\skip297
 \thm@headsep=\skip298
 \dth@everypar=\toks52
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/lastpage\lastpage.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/lastpage\lastpage.sty
 Package: lastpage 2025/08/14 v2.1h lastpage: 2.09 or 2e? (HMM)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/lastpage\lastpage2e.sty
-Package: lastpage2e 2025/08/14 v2.1h Decide which 2e lastpage version to use (H
-MM)
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/lastpage\lastpagemodern
-.sty
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/lastpage\lastpage2e.sty
+Package: lastpage2e 2025/08/14 v2.1h Decide which 2e lastpage version to use (HMM)
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/lastpage\lastpagemodern.sty
 Package: lastpagemodern 2025-08-14 v2.1h Refers to last page's name (HMM; JPG)
 \c@lastpagecount=\count389
 ) 
-))
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+)) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
 Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
 \multirow@colwidth=\skip299
 \multirow@cntb=\count390
 \multirow@dima=\skip300
 \bigstrutjot=\dimen301
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/wrapfig\wrapfig.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/wrapfig\wrapfig.sty
 \wrapoverhang=\dimen302
 \WF@size=\dimen303
 \c@WF@wrappedlines=\count391
 \WF@box=\box66
 \WF@everypar=\toks53
 Package: wrapfig 2003/01/31  v 3.6
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\eso-pic.sty
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\eso-pic.sty
 Package: eso-pic 2025/12/10 v3.0d eso-pic (RN)
 \ESO@tempdima=\dimen304
 \ESO@tempdimb=\dimen305
@@ -1057,13 +933,13 @@ Package: eso-pic 2025/12/10 v3.0d eso-pic (RN)
 Stock height and width: 845.04684pt by 597.50787pt
 Top and edge trims: 0pt and 0pt
 Page height and width: 845.04684pt by 597.50787pt
-Text height and width: 730pt by 469pt
-Spine and edge margins: 71.13188pt and 56.9055pt
-Upper and lower margins: 56.9055pt and 58.14134pt
+Text height and width: 760pt by 503pt
+Spine and edge margins: 54.06006pt and 39.83368pt
+Upper and lower margins: 39.83368pt and 45.21317pt
 Headheight and headsep: 12pt and 18.06749pt
 Footskip: 25.29494pt
 Columnsep and columnseprule: 10pt and 0pt
-Marginparsep and marginparwidth: 10pt and 36.9055pt
+Marginparsep and marginparwidth: 10pt and 19.83368pt
 Sidecapsep and sidecapwidth: 10pt and 48pt
 Sidebarhsep and sidebarwidth: 10pt and 48pt
 Sidebarvsep and sidebartopsep: 12pt and 0pt
@@ -1072,39 +948,36 @@ Sidefoothsep and sidefootwidth: 10pt and 48pt
 Sidefootvsep and sidefootheight: 12pt and 596.39996pt
 ******************************************************
 
-LaTeX Font Info:    Trying to load font information for T1+ptm on input line 17
-4.
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 160.
 (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
-)
-(C:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\A
-bstract\build\abstract.aux
+) (c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.aux
 Package babel Info: 'brazil' activates 'portuges' shorthands.
 (babel)             Reported on input line 14.
 )
 \openout1 = `abstract.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-Package hyperref Info: Link coloring OFF on input line 174.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+Package hyperref Info: Link coloring OFF on input line 160.
 \myptabbox=\box67
 \myptabboxwidth=\skip301
 
@@ -1120,16 +993,16 @@ Package hyperref Info: Link coloring OFF on input line 174.
 * v-part:(T,H,B)=(72.26999pt, 700.50687pt, 72.26999pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=469.0pt
-* \textheight=730.0pt
-* \oddsidemargin=-1.0pt
-* \evensidemargin=-15.0pt
-* \topmargin=-45.43198pt
+* \textwidth=503.0pt
+* \textheight=760.0pt
+* \oddsidemargin=-18.0pt
+* \evensidemargin=-32.0pt
+* \topmargin=-62.5038pt
 * \headheight=12.0pt
 * \headsep=18.06749pt
 * \topskip=10.0pt
 * \footskip=25.29494pt
-* \marginparwidth=36.9055pt
+* \marginparwidth=19.83368pt
 * \marginparsep=10.0pt
 * \columnsep=14.22636pt
 * \skip\footins=12.0pt plus 4.0pt minus 4.0pt
@@ -1142,13 +1015,13 @@ Package hyperref Info: Link coloring OFF on input line 174.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 174.
-Package microtype Info: Applying patch `item' on input line 174.
-Package microtype Info: Applying patch `toc' on input line 174.
-Package microtype Info: Applying patch `eqnum' on input line 174.
-Package microtype Info: Applying patch `footnote' on input line 174.
-Package microtype Info: Applying patch `verbatim' on input line 174.
-LaTeX Info: Redefining \microtypesetup on input line 174.
+LaTeX Info: Redefining \microtypecontext on input line 160.
+Package microtype Info: Applying patch `item' on input line 160.
+Package microtype Info: Applying patch `toc' on input line 160.
+Package microtype Info: Applying patch `eqnum' on input line 160.
+Package microtype Info: Applying patch `footnote' on input line 160.
+Package microtype Info: Applying patch `verbatim' on input line 160.
+LaTeX Info: Redefining \microtypesetup on input line 160.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: No adjustment of tracking.
@@ -1160,66 +1033,52 @@ File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line
- 189.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ztmcm.fd
+LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line 175.
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `ztmcm' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line
- 189.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omlztmcm.fd
+LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line 175.
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line
- 189.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsztmcm.fd
+LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line 175.
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line
- 189.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omxztmcm.fd
+LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line 175.
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 1
-89.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 175.
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 189.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 189.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 189.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
-)
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
+) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Calculating math sizes for size <13> on input line 189.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <13> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 189.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9.62007> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 189.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.80008> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 189.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 175.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.14006> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.60007> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 189.
-LaTeX Font Info:    Trying to load font information for T1+phv on input line 20
-3.
-
-(C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1phv.fd
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 175.
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 189.
+ (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1phv.fd
 File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
 )
 Package microtype Info: Loading generic protrusion settings for font family
@@ -1227,45 +1086,45 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 207.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 196.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 207.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 259.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 196.
 
+Underfull \hbox (badness 10000) in paragraph at lines 193--200
+
+ []
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 254.
 
 Class memoir Warning: The material used in the headers is too large
 (28.26773pt) for the given head height (12.0pt), it is recommended to
 either increase the head height or redesign the header
-(in both cases you will find help in the memoir manual). on input line 259.
+(in both cases you will find help in the memoir manual). on input line 254.
 
 
 Overfull \vbox (16.26773pt too high) has occurred while \output is active []
 
 File: C:/Users/ADMON/Documents/Universidad/logo.png Graphic file (type bmp)
 <C:/Users/ADMON/Documents/Universidad/logo.png>
-
-[1
+ [1
 
 
 ] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
-
-(C:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\A
-bstract\build\abstract.aux)
+(c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2020/03/25>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 21395 strings out of 402983
- 342545 string characters out of 5448482
- 837980 words of memory out of 5000000
- 49828 multiletter control sequences out of 15000+600000
- 696156 words of font info for 146 fonts, out of 8000000 for 9000
+ 21397 strings out of 402983
+ 342564 string characters out of 5448482
+ 839346 words of memory out of 5000000
+ 49830 multiletter control sequences out of 15000+600000
+ 697828 words of font info for 147 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 99i,14n,107p,1099b,442s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,14n,107p,1093b,442s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on C:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Docu
-mentacion\Paper\Abstract\build\abstract.xdv (1 page, 7772 bytes).
+Output written on c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.xdv (1 page, 8924 bytes).

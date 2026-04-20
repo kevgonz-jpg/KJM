@@ -1,7 +1,7 @@
-PWD C:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract
+PWD c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract
 INPUT C:\Users\ADMON\AppData\Local\MiKTeX\miktex\data\le\xetex\xelatex.fmt
-INPUT C:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.tex
-OUTPUT C:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.log
+INPUT c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\abstract.tex
+OUTPUT c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.log
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex\latex\hyperref\hyperref.sty
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex\latex\abntex2\abntex2.cls
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex\latex\abntex2\abntex2.cls
@@ -239,16 +239,17 @@ INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\t1ptm.fd
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\t1ptm.fd
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\t1ptm.fd
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8t.tfm
-INPUT C:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.aux
-INPUT C:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.aux
-INPUT C:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.aux
-OUTPUT C:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.aux
+INPUT c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.aux
+INPUT c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.aux
+INPUT c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.aux
+OUTPUT c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.aux
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-ptm.cfg
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-ptm.cfg
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-ptm.cfg
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8t.tfm
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8t.tfm
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmb8t.tfm
+INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmbi8t.tfm
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8t.tfm
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8t.tfm
 INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmbi8t.tfm
@@ -372,5 +373,5 @@ INPUT C:\Users\ADMON\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\helvetic\phvr
 INPUT C:\Users\ADMON\Documents\Universidad\logo.png
 INPUT C:\Users\ADMON\Documents\Universidad\logo.png
 INPUT C:\Users\ADMON\Documents\Universidad\logo.png
-OUTPUT C:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.xdv
-INPUT C:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.aux
+OUTPUT c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.xdv
+INPUT c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\Paper\Abstract\build\abstract.aux
