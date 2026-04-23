@@ -1,0 +1,60 @@
+\contentsline {section}{\numberline {1}Introduccion y motivacion}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Que resuelve este notebook}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Diferencia fundamental con el enfoque bayesiano}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Pipeline de estimacion}{4}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Estructura del notebook}{4}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Modelo espacio-estado}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Formulacion general}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Cargas Nelson-Siegel (DNS, $k=3$)}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Cargas Nelson-Siegel-Svensson (DNSS, $k=4$)}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Interpretacion de $\tau $ y el hump}{6}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Estructura de la matriz $\mathbf {F}$}{6}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Rolling Grid Search de $\tau _t$}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Fundamento: por que re-estimar $\tau $ en el tiempo}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Reformulacion via Residual Maker}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Ventana rodante vs expandiente}{8}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Grid Search 2D para DNSS}{8}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Filtro de Kalman con $H_t$ variable}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Algoritmo completo}{9}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Por que la forma Joseph (ecuacion~\ref {eq:joseph})}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Cholesky para log-det y cuadratica}{10}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Inicializacion estacionaria}{10}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Implementacion con Numba JIT}{10}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Suavizador RTS (Rauch-Tung-Striebel)}{11}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Que aporta el suavizador}{11}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Algoritmo backward}{11}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Estimacion MLE multi-start}{11}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Problema de optimizacion}{12}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Parametrizacion sin restricciones}{12}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Numero de parametros por configuracion}{12}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Extensiones para plazos largos}{13}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}Opcion A --- $R$ estructurada por grupos}{13}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}Opcion C --- Pesos en la log-verosimilitud}{13}{subsubsection.6.4.2}%
+\contentsline {section}{\numberline {7}Analisis post-ajuste}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Factores latentes --- \texttt {plot\_factores()}}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Evolucion de $\tau _t$ --- \texttt {plot\_tau\_evolution()}}{14}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Curva ajustada --- \texttt {plot\_curvas\_ajustadas()}}{14}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Residuos de medicion --- \texttt {analisis\_residuos()}}{14}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Diagnosticos del filtro --- \texttt {diagnosticos\_filtro()}}{14}{subsection.7.5}%
+\contentsline {subsection}{\numberline {7.6}Parametros MLE --- \texttt {resumen\_parametros()}}{15}{subsection.7.6}%
+\contentsline {subsection}{\numberline {7.7}Perfil SSE de $\tau $ --- \texttt {plot\_perfil\_sse\_tau()}}{15}{subsection.7.7}%
+\contentsline {section}{\numberline {8}Documentacion de funciones}{15}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Cargas}{15}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Grid Search}{16}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Kalman Filter y RTS}{16}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}MLE}{17}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Pipeline completo --- \texttt {fit\_model()}}{17}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.6}Analisis post-ajuste}{18}{subsection.8.6}%
+\contentsline {section}{\numberline {9}Funcion principal \texttt {fit\_dns\_kalman()}}{18}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Firma completa}{18}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Descripcion de parametros}{19}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Estructura del retorno}{20}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Ejemplos de uso}{21}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Ejemplo 1 --- DNS basico}{21}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Ejemplo 2 --- DNSS con ventana rodante}{22}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Ejemplo 3 --- Mejoras para plazos largos (Opciones A y C)}{23}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Ejemplo 4 --- Comparar las tres estructuras de $F$}{23}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}Ejemplo 5 --- Uso programatico para comparativa con Bayes}{24}{subsection.10.5}%
+\contentsline {section}{\numberline {11}Referencia completa de funciones}{25}{section.11}%
+\contentsline {section}{\numberline {12}Guia de decisiones}{26}{section.12}%
+\contentsline {section}{Referencias}{26}{table.caption.7}%

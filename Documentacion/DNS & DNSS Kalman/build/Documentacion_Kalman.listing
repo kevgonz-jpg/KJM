@@ -1,0 +1,27 @@
+# Ajuste KF
+res_kf = fit_dns_kalman(
+    dates=df.index, yields=df[yield_cols].values,
+    maturities=mats, model='DNS',
+    plot=False, verbose=False)
+
+# Ajuste Bayesiano (del otro notebook):
+# res_bayes = fit_dns_bayes(...)
+
+# Comparar RMSE:
+for i, m in enumerate(mats):
+    r_kf    = res_kf['rmse_mat'][i]             * 100
+    r_bayes = res_bayes['fit']['rmse_mat'][i]    * 100
+    print(f"  {m:.0f}Y  KF={r_kf:.3f}  Bayes={r_bayes:.3f}  "
+          f"Delta={r_bayes-r_kf:+.3f}")
+
+# Ancho del IC de beta_0:
+# KF: basado en P_smooth de RTS (gaussiano, condicional en theta_hat)
+# Bayes: percentiles de muestras MCMC (integra incertidumbre de theta y tau)
+sd_kf  = np.sqrt(res_kf['P_smoothed'][:, 0, 0])
+ancho_kf    = (2 * 1.96 * sd_kf).mean()
+
+b_mean, q025, q975, _ = extract_posterior_betas(res_bayes['chains'])
+ancho_bayes = (q975[:, 0] - q025[:, 0]).mean()
+
+print(f"\nIC medio beta_0 --- KF: {ancho_kf:.4f}   Bayes: {ancho_bayes:.4f}")
+print("El IC bayesiano es mas amplio: integra incertidumbre de theta y tau.")

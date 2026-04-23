@@ -1,10 +1,10 @@
 # Fdb version 4
-["xdvipdfmx"] 1776722911.96416 "build/abstract.xdv" "abstract.pdf" "abstract" 1776722913.33797 0
-  "build/abstract.xdv" 1776722911 8924 e427f15263f4a0ac4ab86d621d40c133 "xelatex"
+["xdvipdfmx"] 1776906831.54696 "build/abstract.xdv" "abstract.pdf" "abstract" 1776906832.42597 0
+  "build/abstract.xdv" 1776906831 8732 99cba0f70686dd67938cee49b11c8af5 "xelatex"
   (generated)
   "abstract.pdf"
   (rewritten before read)
-["xelatex"] 1776722906.63292 "c:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/Paper/Abstract/abstract.tex" "build/abstract.xdv" "abstract" 1776722913.30524 0
+["xelatex"] 1776906828.61234 "c:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/Paper/Abstract/abstract.tex" "build/abstract.xdv" "abstract" 1776906832.40592 0
   "C:/Users/ADMON/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1776144712 27177068 c6d2e3520db0be0db6aa88d54bf2c646 ""
   "C:/Users/ADMON/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/helvetic/phvr8t.tfm" 1136790254 7040 b2bd27e2bfe6f6948cbc3239cae7444f ""
   "C:/Users/ADMON/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/times/ptmb7t.tfm" 1136790254 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -141,9 +141,9 @@
   "C:/Users/ADMON/AppData/Local/Programs/MiKTeX/tex/latex/wrapfig/wrapfig.sty" 1044403200 26220 3701aebf80ccdef248c0c20dd062fea9 ""
   "C:/Users/ADMON/AppData/Local/Programs/MiKTeX/tex/latex/xpatch/xpatch.sty" 1585221260 8510 7803f78066c4f9d008405191a4b43073 ""
   "C:/Users/ADMON/Documents/Universidad/logo.png" 1771891601 120188 67e5dafb31a5901616aa73c816d818db ""
-  "abstract.tex" 1776722901 11947 1156738bde1b7f14484e9ab758c67b77 ""
-  "build/abstract.aux" 1776722911 625 13063b549405431d03ce4695ef05f63e "xelatex"
-  "c:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/Paper/Abstract/abstract.tex" 1776722901 11947 1156738bde1b7f14484e9ab758c67b77 ""
+  "abstract.tex" 1776906826 11821 cdcca1c6951146dbd60ae5780227cb50 ""
+  "build/abstract.aux" 1776906831 625 13063b549405431d03ce4695ef05f63e "xelatex"
+  "c:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/Paper/Abstract/abstract.tex" 1776906826 11821 cdcca1c6951146dbd60ae5780227cb50 ""
   (generated)
   "build/abstract.aux"
   "build/abstract.log"
