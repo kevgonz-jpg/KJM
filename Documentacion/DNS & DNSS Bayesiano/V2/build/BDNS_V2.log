@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (MiKTeX 26.2) (preloaded format=xelatex 2026.4.14)  17 APR 2026 08:48
+This is XeTeX, Version 3.141592653-2.6-0.999998 (MiKTeX 26.2) (preloaded format=xelatex 2026.4.14)  9 MAY 2026 19:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1092,10 +1092,6 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-Overfull \hbox (59.90674pt too wide) in paragraph at lines 275--276
- [][] 
- []
-
 
 LaTeX Font Warning: Font shape `TU/LatinModernMono(0)/b/n' undefined
 (Font)              using `TU/LatinModernMono(0)/m/n' instead on input line 281.
@@ -1110,7 +1106,7 @@ LaTeX Font Info:    Font shape `TU/LatinModernMono(0)/b/n' will be
 (Font)              scaled to size 10.56006pt on input line 281.
 [1
 
-] [2] (c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\DNS & DNSS Bayesiano\V2\build\BDNS_V2.toc [1])
+] (c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\DNS & DNSS Bayesiano\V2\build\BDNS_V2.toc [1])
 \tf@toc=\write5
 \openout5 = `BDNS_V2.toc'.
 
@@ -1840,4 +1836,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  102i,16n,107p,1293b,1680s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\DNS & DNSS Bayesiano\V2\build\BDNS_V2.xdv (28 pages, 955564 bytes).
+Output written on c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\DNS & DNSS Bayesiano\V2\build\BDNS_V2.xdv (27 pages, 954408 bytes).

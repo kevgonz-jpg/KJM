@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (MiKTeX 26.2) (preloaded format=xelatex 2026.4.14)  22 APR 2026 17:58
+This is XeTeX, Version 3.141592653-2.6-0.999998 (MiKTeX 26.2) (preloaded format=xelatex 2026.4.14)  9 MAY 2026 19:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1096,7 +1096,7 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) (C:\Users\ADMON\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-Overfull \hbox (105.42996pt too wide) in paragraph at lines 276--277
+Overfull \hbox (44.3349pt too wide) in paragraph at lines 276--277
  [][] 
  []
 
@@ -1853,10 +1853,10 @@ Package rerunfilecheck Info: File `Documentacion_Kalman.out' has not changed.
 Here is how much of TeX's memory you used:
  46595 strings out of 402983
  1107535 string characters out of 5448482
- 2111308 words of memory out of 5000000
+ 2111290 words of memory out of 5000000
  74550 multiletter control sequences out of 15000+600000
  647831 words of font info for 172 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  102i,15n,107p,1300b,1667s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\DNS & DNSS Kalman\build\Documentacion_Kalman.xdv (28 pages, 984400 bytes).
+Output written on c:\Users\ADMON\Documents\Universidad\Proyecto KMJ\codigo\Documentacion\DNS & DNSS Kalman\build\Documentacion_Kalman.xdv (28 pages, 984408 bytes).

@@ -1,13 +1,13 @@
 # Fdb version 4
-["xdvipdfmx"] 1776433770.20531 "build/BDNS_V2.xdv" "BDNS_V2.pdf" "BDNS_V2" 1776433772.93029 0
+["xdvipdfmx"] 1778373814.13979 "build/BDNS_V2.xdv" "BDNS_V2.pdf" "BDNS_V2" 1778373815.21985 0
   "BDNS_V2.xdv" 0 -1 0 ""
-  "build/BDNS_V2.xdv" 1776433766 955564 f008828443d673b3b66702d2ef31560e "xelatex"
+  "build/BDNS_V2.xdv" 1778373813 954408 87c47ba938db32af151c78da62bab7c6 "xelatex"
   (generated)
   "BDNS_V2.pdf"
   "build/BDNS_V2.pdf"
   (rewritten before read)
-["xelatex"] 1776433735.92197 "c:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/DNS & DNSS Bayesiano/V2/BDNS_V2.tex" "build/BDNS_V2.xdv" "BDNS_V2" 1776433772.83177 0
-  "BDNS_V2.tex" 1776433724 66601 e2ac0f627581e6d058e972f09b59bc2d ""
+["xelatex"] 1778373804.73113 "c:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/DNS & DNSS Bayesiano/V2/BDNS_V2.tex" "build/BDNS_V2.xdv" "BDNS_V2" 1778373815.17878 0
+  "BDNS_V2.tex" 1778373793 66601 f872c601a5a7102a676e027495f00d5e ""
   "C:/Users/ADMON/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1776144712 27177068 c6d2e3520db0be0db6aa88d54bf2c646 ""
   "C:/Users/ADMON/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136790254 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "C:/Users/ADMON/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1233951848 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -272,11 +272,11 @@
   "C:/Users/ADMON/AppData/Local/Programs/MiKTeX/tex/latex/trimspaces/trimspaces.sty" 1253169183 1380 971a51b00a14503ddf754cab24c3f209 ""
   "C:/Users/ADMON/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/ADMON/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "build/BDNS_V2.aux" 1776433766 12956 ddb8bd8301864d2d6e4c4436f518e242 "xelatex"
-  "build/BDNS_V2.listing" 1776433765 796 a9396617d5ab396a4f159a1d2e8618ff "xelatex"
-  "build/BDNS_V2.out" 1776433766 14215 e8d23a0d419c5d9ff1636050d9a7fe8b "xelatex"
-  "build/BDNS_V2.toc" 1776433766 5906 bc1389d6f03205080748e59f24d4453a "xelatex"
-  "c:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/DNS & DNSS Bayesiano/V2/BDNS_V2.tex" 1776433724 66601 e2ac0f627581e6d058e972f09b59bc2d ""
+  "build/BDNS_V2.aux" 1778373812 12956 a12dd5024827535a7fff9fd64274272b "xelatex"
+  "build/BDNS_V2.listing" 1778373812 796 a9396617d5ab396a4f159a1d2e8618ff "xelatex"
+  "build/BDNS_V2.out" 1778373813 14215 e8d23a0d419c5d9ff1636050d9a7fe8b "xelatex"
+  "build/BDNS_V2.toc" 1778373813 5906 bc1389d6f03205080748e59f24d4453a "xelatex"
+  "c:/Users/ADMON/Documents/Universidad/Proyecto KMJ/codigo/Documentacion/DNS & DNSS Bayesiano/V2/BDNS_V2.tex" 1778373793 66601 f872c601a5a7102a676e027495f00d5e ""
   (generated)
   "build/BDNS_V2.aux"
   "build/BDNS_V2.listing"
