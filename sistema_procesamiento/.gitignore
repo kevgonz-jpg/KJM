@@ -1,0 +1,20 @@
+# Entorno virtual
+.venv/
+
+# Datos pesados (no se suben a git — van en Drive)
+datos/*.db
+datos/*.csv
+
+# Outputs generados
+outputs/
+
+# Archivos de Python compilado
+__pycache__/
+*.pyc
+*.pyo
+
+# Configuraciones locales de VSCode
+.vscode/settings.json
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
