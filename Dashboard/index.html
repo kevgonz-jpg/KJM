@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard dinámico de visualización de curvas de rendimiento soberano (TES) de Colombia del proyecto KJM.">
+    <title>KJM Dashboard — Curvas de Rendimiento TES</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Vanilla CSS Stylesheet -->
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --sidebar-bg: rgba(20, 22, 30, 0.7);
+            --card-bg: rgba(30, 34, 45, 0.45);
+            --text-color: #f2f5fa;
+            --text-muted: #8a94a6;
+            --accent-primary: #00CC96;
+            --accent-secondary: #ff6b9d;
+            --accent-glow: rgba(0, 204, 150, 0.15);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            --transition-speed: 0.3s;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+        /* Ambient Glow Backgrounds */
+        .ambient-glow-1 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 204, 150, 0.08) 0%, rgba(0, 204, 150, 0) 70%);
+            top: -200px;
+            right: -100px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .ambient-glow-2 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.06) 0%, rgba(255, 107, 157, 0) 70%);
+            bottom: -300px;
+            left: -200px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        /* Sidebar Navigation */
+        aside {
+            width: 320px;
+            background: var(--sidebar-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-color);
+            padding: 2.5rem 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 10;
+        }
+        .logo-container {
+            margin-bottom: 3rem;
+        }
+        .logo-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #a2abbd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .logo-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-primary);
+            font-weight: 700;
+            margin-top: 0.2rem;
+        }
+        nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            flex-grow: 1;
+        }
+        .nav-item {
+            width: 100%;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            text-align: left;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-item:hover {
+            color: var(--text-color);
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--border-hover);
+        }
+        .nav-item.active {
+            color: #ffffff;
+            background: rgba(0, 204, 150, 0.08);
+            border-color: var(--accent-primary);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+        .nav-item-icon {
+            font-size: 1.2rem;
+            width: 24px;
+            display: inline-block;
+            text-align: center;
+        }
+        .sidebar-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+        }
+        .project-info-title {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .project-info-text {
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #bdc5d1;
+        }
+        /* Main Content Layout */
+        main {
+            margin-left: 320px;
+            padding: 2.5rem 3rem;
+            width: calc(100vw - 320px);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            position: relative;
+            z-index: 5;
+        }
+        header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+        .header-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        /* Dashboard Tabs Container */
+        .tab-panel {
+            display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            animation: fadeIn 0.4s ease-out;
+        }
+        .tab-panel.active {
+            display: flex;
+        }
+        /* Glassmorphic Chart Wrapper */
+        .chart-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .chart-container {
+            width: 100%;
+            height: 650px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #111115;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        /* Description Cards */
+        .description-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+        .info-card {
+            background: rgba(30, 34, 45, 0.25);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .info-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .info-card-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #d1d8e3;
+        }
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: #bdc5d1;
+            font-weight: 500;
+        }
+        .badge-accent {
+            background: rgba(0, 204, 150, 0.1);
+            border-color: rgba(0, 204, 150, 0.25);
+            color: var(--accent-primary);
+        }
+        /* Key Metrics Banner */
+        .metrics-banner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        .metric-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .metric-indicator {
+            font-size: 0.75rem;
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Responsive Breakpoints */
+        @media (max-width: 1200px) {
+            .description-grid {
+                grid-template-columns: 1fr;
+            }
+            .metrics-banner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            aside {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1.5rem;
+            }
+            main {
+                width: 100%;
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+            .chart-container {
+                height: 450px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+    <!-- Navigation Sidebar -->
+    <aside>
+        <div class="logo-container">
+            <div class="logo-title" id="logo-main">Proyecto KJM</div>
+            <div class="logo-subtitle">Yield Curves · BVC</div>
+        </div>
+        <nav role="tablist">
+            <button id="nav-btn-1" class="nav-item active" role="tab" aria-selected="true" aria-controls="panel-1" onclick="switchTab(1)">
+                <span class="nav-item-icon">📈</span>
+                Yields de Mercado
+            </button>
+            <button id="nav-btn-2" class="nav-item" role="tab" aria-selected="false" aria-controls="panel-2" onclick="switchTab(2)">
+                <span class="nav-item-icon">⚡</span>
+                Validación Integral
+            </button>
+            <button id="nav-btn-3" class="nav-item" role="tab" aria-selected="false" aria-controls="panel-3" onclick="switchTab(3)">
+                <span class="nav-item-icon">🕸️</span>
+                Superficie 3D
+            </button>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="project-info-title">Modelado ETTI</div>
+            <div class="project-info-text">Visualizador dinámico de curvas de tasa spot cupón-cero para el mercado de TES de Colombia (2015-2026).</div>
+        </div>
+    </aside>
+    <!-- Main Workspace -->
+    <main>
+        <header>
+            <h1 id="main-heading">Visualizador de Curvas</h1>
+            <div class="header-meta">Muestreo interactivo y validación de estimaciones de tasas spot</div>
+        </header>
+        <!-- TAB 1: Yields de Mercado -->
+        <section id="panel-1" class="tab-panel active" role="tabpanel" aria-labelledby="nav-btn-1">
+            <div class="chart-card">
+                <div class="chart-container">
+                    <iframe src="plots/chart1.html" title="Curva TFIT: Evolución de Yields de Mercado (VWAP) - Año 2016" id="iframe-1"></iframe>
+                </div>
+            </div>
+            
+            <div class="description-grid">
+                <div class="info-card">
+                    <div class="info-card-title">🔍 Intuición Económica y Financiera</div>
+                    <div class="info-card-text">
+                        Este gráfico animado muestra la dispersión empírica de los rendimientos (tasa VWAP en %) de los bonos TES a tasa fija en pesos (TFIT) cotizados en el mercado durante el año 2016 en función de su plazo residual (madurez en años). Cada punto es un bono individual negociado. Al pulsar <b>Play</b>, se observa cómo la curva se desplaza de forma interactiva día tras día, reflejando las variaciones en las expectativas de inflación, política monetaria y prima por plazo.
+                    </div>
+                    <div class="badge-list">
+                        <span class="badge badge-accent">Mercado Real</span>
+                        <span class="badge">TES Tasa Fija</span>
+                        <span class="badge">Año 2016</span>
+                        <span class="badge">Plotly Scatter Animation</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-title">💻 Ubicación en Código</div>
+                    <div class="info-card-text">
+                        Generado a partir del notebook de preprocesamiento del sistema:<br>
+                        <code style="color: #ff6b9d; font-size: 0.8rem; word-break: break-all;">sistema_procesamiento/notebooks/experimentacion_curva_fase1_famas1.ipynb</code> (Celda index 4)
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TAB 2: Validación Integral -->
+        <section id="panel-2" class="tab-panel" role="tabpanel" aria-labelledby="nav-btn-2">
+            <div class="chart-card">
+                <div class="chart-container">
+                    <iframe src="plots/chart2.html" title="Validación Integral de Curvas y Tasas Cortas" id="iframe-2"></iframe>
+                </div>
+            </div>
+            
+            <div class="description-grid">
+                <div class="info-card">
+                    <div class="info-card-title">🔍 Validación Multiorigen de la Estructura Temporal</div>
+                    <div class="info-card-text">
+                        Esta visualización integra múltiples fuentes de datos monetarios y de renta fija sobre la línea del tiempo. Compara la curva continua resultante del **Bootstrapping** (tasas spot calculadas bono a bono) y la **Curva Interpolada** a plazos fijos con las referencias del mercado monetario de corto plazo (como la **TIB** - Tasa Interbancaria y los diferentes plazos de la **IBR** - Indicador Bancario de Referencia) y la curva de **TCO** (Títulos de Carteras Colectivas). Esto permite validar visualmente la consistencia y el anclaje del tramo ultracorto de la estructura temporal de tasas de interés.
+                    </div>
+                    <div class="badge-list">
+                        <span class="badge badge-accent">Bootstrapping Spot</span>
+                        <span class="badge">TIB Overnight</span>
+                        <span class="badge">IBR 1M-12M</span>
+                        <span class="badge">TCO Cero-Cupón</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-title">💻 Ubicación en Código</div>
+                    <div class="info-card-text">
+                        Visualización final del pipeline integrado:<br>
+                        <code style="color: #ff6b9d; font-size: 0.8rem; word-break: break-all;">sistema_procesamiento/notebooks/experimentacion_curva_fase1_famas1.ipynb</code> (Celda index 30)
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TAB 3: Superficie 3D -->
+        <section id="panel-3" class="tab-panel" role="tabpanel" aria-labelledby="nav-btn-3">
+            <div class="chart-card">
+                <div class="chart-container">
+                    <iframe src="plots/chart3.html" title="Evolución de la Curva de Rendimientos 3D" id="iframe-3"></iframe>
+                </div>
+            </div>
+            
+            <div class="description-grid">
+                <div class="info-card">
+                    <div class="info-card-title">🔍 Superficie 3D: Evolución Histórica de la ETTI</div>
+                    <div class="info-card-text">
+                        Representación en tres dimensiones de la evolución histórica de la curva cero-cupón de los TES de Colombia. El eje X representa los plazos de vencimiento (de 1 a 15 años), el eje Y recorre las fechas de negociación a lo largo del tiempo, y el eje Z representa la tasa de rendimiento (%). La forma de la superficie y sus pendientes revelan la alternancia entre curvas normales (crecientes), planas o invertidas (típicas de fases pre-recesivas o de alta inflación). Puede rotarse y ampliarse de forma interactiva en 3D.
+                    </div>
+                    <div class="badge-list">
+                        <span class="badge badge-accent">Superficie 3D</span>
+                        <span class="badge">ETTI Histórica</span>
+                        <span class="badge">Plotly Surface</span>
+                        <span class="badge">Viridis Colormap</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-title">💻 Ubicación en Código</div>
+                    <div class="info-card-text">
+                        Encontrado en el análisis de limpieza y dinámica:<br>
+                        <code style="color: #ff6b9d; font-size: 0.8rem; word-break: break-all;">TES_colombia/Limpieza_TESCOL_y_Dinamica.ipynb</code> (Celda index 14)
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Key Metrics Banner at bottom -->
+        <footer class="metrics-banner" role="contentinfo">
+            <div class="metric-card">
+                <div class="metric-label">Rango Histórico</div>
+                <div class="metric-value">2015 - 2026</div>
+                <div class="metric-indicator">11 Años de datos</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Días Hábiles</div>
+                <div class="metric-value">2.736</div>
+                <div class="metric-indicator">Sin imputaciones artificiales</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Nodos Estándar</div>
+                <div class="metric-value">9 Nodos</div>
+                <div class="metric-indicator">De 1Y hasta 30Y</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Instrumentos</div>
+                <div class="metric-value">TES, TIB, IBR, TCO</div>
+                <div class="metric-indicator">Validación multiorigen</div>
+            </div>
+        </footer>
+    </main>
+    <!-- Vanilla Javascript Tab Switcher -->
+    <script>
+        function switchTab(tabIndex) {
+            // Desactivate all nav tabs
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                item.setAttribute('aria-selected', 'false');
+            });
+            // Desactivate all panel sections
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            // Activate chosen tab and panel
+            const activeBtn = document.getElementById('nav-btn-' + tabIndex);
+            activeBtn.classList.add('active');
+            activeBtn.setAttribute('aria-selected', 'true');
+            document.getElementById('panel-' + tabIndex).classList.add('active');
+            // Update page headers dynamically
+            const headings = [
+                "Evolución de Yields de Mercado (VWAP)",
+                "Validación de Estructura Temporal y Tasas Monetarias",
+                "Superficie Histórica 3D de la ETTI"
+            ];
+            document.getElementById('main-heading').innerText = headings[tabIndex - 1];
+            // Re-render iframe source if needed to refresh animations/3D context
+            const iframe = document.getElementById('iframe-' + tabIndex);
+            if (iframe) {
+                iframe.src = iframe.src;
+            }
+        }
+    </script>
+</body>
+</html>
