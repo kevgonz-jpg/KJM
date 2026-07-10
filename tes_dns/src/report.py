@@ -13,10 +13,12 @@ Flujo:
 Funciones exportadas
 --------------------
 plot_yield_curve(yields, dates, maturities, ...)  → path PNG
-plot_factors(betas, dates, labels, ...)            → path PNG
-plot_tau(tau1_t, tau2_t, dates, ...)               → path PNG
+plot_factors(betas, dates, model, beta_std, ...)   → path PNG
+plot_tau(tau1_t, dates, tau2_t, ..., bandas/comparación) → path PNG
 plot_residuals(residuals, maturities, ...)         → path PNG
+plot_residuals_heatmap(residuals, maturities, ...) → path PNG
 plot_diagnostics_mcmc(chains, ...)                 → path PNG
+plot_diagnostics_pf(res_pf, ...)                   → path PNG
 plot_oos_comparison(df_kf, df_bayes, horizons, ...)→ path PNG
 build_latex_report(config)                         → path TEX
 compile_pdf(tex_path)                              → path PDF | None
@@ -106,9 +108,21 @@ def plot_yield_curve(yields, dates, maturities,
 
 
 def plot_factors(betas, dates, model='DNS',
+                 beta_std=None,
                  out_dir='outputs/figures',
                  filename='fig_factors.png') -> str:
-    """Grafica los factores latentes (nivel, pendiente, curvatura)."""
+    """
+    Grafica los factores latentes (nivel, pendiente, curvatura).
+
+    Parámetros
+    ----------
+    beta_std : (T, k) | None
+        Desviación estándar de cada factor en cada periodo (p.ej.
+        sqrt(diag(P_smooth)) del KF, o x_filt_std del Particle Filter).
+        Si se provee, se dibuja una banda de confianza al 95%
+        (beta ± 1.96·std) detrás de la línea, igual que en el notebook
+        del Particle Filter.
+    """
     _ensure_dir(out_dir)
     k      = betas.shape[1]
     labels = ['Nivel (\\u03b2\\u2081)', 'Pendiente (\\u03b2\\u2082)',
@@ -120,10 +134,17 @@ def plot_factors(betas, dates, model='DNS',
         axes = [axes]
 
     for i, ax in enumerate(axes):
+        if beta_std is not None:
+            lo = betas[:, i] - 1.96 * beta_std[:, i]
+            hi = betas[:, i] + 1.96 * beta_std[:, i]
+            ax.fill_between(dates, lo, hi, color=colores_f[i], alpha=0.18,
+                             label='IC 95%' if i == 0 else None)
         ax.plot(dates, betas[:, i], color=colores_f[i], lw=1.0)
         ax.axhline(0, color='gray', lw=0.6, ls=':')
         ax.set_ylabel(labels[i], fontsize=8)
         ax.yaxis.set_major_locator(MaxNLocator(5))
+        if i == 0 and beta_std is not None:
+            ax.legend(fontsize=7, loc='upper right')
 
     axes[-1].set_xlabel('Fecha')
     fig.suptitle(f'Factores latentes — {model}', y=1.01)
@@ -136,23 +157,56 @@ def plot_factors(betas, dates, model='DNS',
 
 
 def plot_tau(tau1_t, dates, tau2_t=None, model='DNS',
-             out_dir='outputs/figures',
-             filename='fig_tau.png') -> str:
-    """Grafica la evolución temporal de tau1 (y tau2 si es DNSS)."""
+            tau1_band=None, tau2_band=None,
+            tau1_compare=None, tau2_compare=None, label_compare=None,
+            out_dir='outputs/figures',
+            filename='fig_tau.png') -> str:
+    """
+    Grafica la evolución temporal de tau1 (y tau2 si es DNSS).
+
+    Parámetros
+    ----------
+    tau1_band, tau2_band : (lo, hi) | None
+        Tupla de arrays (T,) con la banda de confianza (p.ej. percentiles
+        de las partículas del PF, o tau1 ± 1.96·std en escala log
+        exponenciada). Se dibuja como sombra detrás de la línea principal.
+    tau1_compare, tau2_compare : (T,) | None
+        Serie adicional para comparar contra la principal en el mismo
+        panel (p.ej. tau1_t del grid search del KF superpuesto sobre el
+        tau1_t dinámico del Particle Filter, o viceversa).
+    label_compare : str | None
+        Etiqueta de la serie de comparación (p.ej. 'KF (grid search)').
+    """
     _ensure_dir(out_dir)
     n_panels = 2 if (tau2_t is not None and model == 'DNSS') else 1
     fig, axes = plt.subplots(n_panels, 1, figsize=(12, 3 * n_panels), sharex=True)
     if n_panels == 1:
         axes = [axes]
 
-    axes[0].plot(dates, tau1_t, color=COLORES[0], lw=1.0)
+    if tau1_band is not None:
+        axes[0].fill_between(dates, tau1_band[0], tau1_band[1],
+                             color=COLORES[0], alpha=0.18, label='IC 95%')
+    axes[0].plot(dates, tau1_t, color=COLORES[0], lw=1.0, label=r'$\tau_1$')
+    if tau1_compare is not None:
+        axes[0].plot(dates, tau1_compare, color='#7f7f7f', lw=0.9, ls='--',
+                     label=label_compare or 'Comparación')
     axes[0].set_ylabel(r'$\tau_1$')
     axes[0].set_title(f'Parametro de forma $\\tau_1$ — {model}')
+    if tau1_band is not None or tau1_compare is not None:
+        axes[0].legend(fontsize=8, loc='upper right')
 
     if n_panels == 2:
-        axes[1].plot(dates, tau2_t, color=COLORES[1], lw=1.0)
+        if tau2_band is not None:
+            axes[1].fill_between(dates, tau2_band[0], tau2_band[1],
+                                 color=COLORES[1], alpha=0.18, label='IC 95%')
+        axes[1].plot(dates, tau2_t, color=COLORES[1], lw=1.0, label=r'$\tau_2$')
+        if tau2_compare is not None:
+            axes[1].plot(dates, tau2_compare, color='#7f7f7f', lw=0.9, ls='--',
+                         label=label_compare or 'Comparación')
         axes[1].set_ylabel(r'$\tau_2$')
         axes[1].set_title(r'Parametro de forma $\tau_2$')
+        if tau2_band is not None or tau2_compare is not None:
+            axes[1].legend(fontsize=8, loc='upper right')
 
     axes[-1].set_xlabel('Fecha')
     fig.tight_layout()
@@ -215,6 +269,83 @@ def plot_residuals(residuals, maturities, dates,
         ax.set_xlabel('Cuantiles teóricos', fontsize=7)
 
     fig.suptitle('Diagnóstico de residuos de medicion (pb)', y=1.01)
+    path = os.path.join(out_dir, filename)
+    fig.savefig(path)
+    plt.close(fig)
+    return path
+
+
+def plot_residuals_heatmap(residuals, maturities, dates,
+                           out_dir='outputs/figures',
+                           filename='fig_residuals_heatmap.png') -> str:
+    """
+    Mapa de calor de residuos de medición: plazos (eje Y) vs tiempo (eje X).
+    Rojo = el modelo SUBESTIMA el rendimiento observado (residuo > 0,
+    y_real > y_hat). Azul = el modelo SOBREESTIMA (residuo < 0).
+
+    Complementa a plot_residuals(): aquella muestra series/histogramas/QQ
+    por plazo; esta muestra de un vistazo si hay periodos o tramos de la
+    curva donde el error se concentra sistemáticamente (p.ej. alrededor de
+    quiebres estructurales conocidos como COVID o cambios de gobierno).
+    """
+    from matplotlib.colors import TwoSlopeNorm, LinearSegmentedColormap
+    _ensure_dir(out_dir)
+    res_pb = residuals * 100
+    T = len(dates)
+
+    fig, ax = plt.subplots(figsize=(14, 5))
+    vmax = np.percentile(np.abs(res_pb), 97)
+    norm = TwoSlopeNorm(vmin=-vmax, vcenter=0, vmax=vmax)
+    cmap = LinearSegmentedColormap.from_list('bwr_soft', ['#2166ac', '#f7f7f7', '#d6604d'], N=256)
+    im = ax.imshow(res_pb.T, aspect='auto', cmap=cmap, norm=norm, interpolation='nearest')
+
+    n_t = min(10, T // 40 + 1)
+    t_ticks = np.linspace(0, T - 1, n_t, dtype=int)
+    ax.set_xticks(t_ticks)
+    ax.set_xticklabels([str(dates[i])[:7] for i in t_ticks], rotation=45, ha='right')
+    ax.set_yticks(range(len(maturities)))
+    ax.set_yticklabels([f'{m:.0f}Y' for m in maturities])
+    ax.set_xlabel('Fecha'); ax.set_ylabel('Plazo')
+    ax.set_title('Residuos de medición (pb)\n[rojo = subestima, azul = sobreestima]')
+    plt.colorbar(im, ax=ax, fraction=0.025, pad=0.02, label='Residuo (pb)')
+    plt.tight_layout()
+
+    path = os.path.join(out_dir, filename)
+    fig.savefig(path)
+    plt.close(fig)
+    return path
+
+
+def plot_diagnostics_pf(res_pf, out_dir='outputs/figures',
+                        filename='fig_pf_diagnostics.png') -> str:
+    """
+    Diagnóstico propio del Particle Filter: Effective Sample Size (ESS) a
+    lo largo del tiempo y frecuencia de remuestreo — análogo en espíritu a
+    los traceplots/R-hat del Gibbs sampler, pero para degeneración de
+    partículas en vez de convergencia de cadenas MCMC.
+    """
+    _ensure_dir(out_dir)
+    dates  = res_pf['dates']
+    ess_t  = res_pf['ess_t']
+    N      = res_pf['n_particles']
+    resamp = res_pf['resampled_t']
+    model  = res_pf['model']
+
+    fig, axes = plt.subplots(2, 1, figsize=(12, 6), sharex=True,
+                             gridspec_kw=dict(height_ratios=[2, 1]))
+    axes[0].plot(dates, ess_t / N, color=COLORES[0], lw=0.8)
+    axes[0].axhline(0.5, color='gray', lw=0.8, ls='--', label='Umbral remuestreo (ESS/N=0.5)')
+    axes[0].fill_between(dates, 0, ess_t / N, alpha=0.10, color=COLORES[0])
+    axes[0].set_ylabel('ESS / N'); axes[0].set_ylim(0, 1.02); axes[0].legend(fontsize=8)
+    axes[0].set_title(f'Effective Sample Size — {model} (N={N} partículas)')
+
+    axes[1].scatter(np.array(dates)[resamp], np.ones(int(resamp.sum())),
+                    s=3, color=COLORES[1], marker='|')
+    axes[1].set_yticks([])
+    axes[1].set_title(f'Periodos con remuestreo ({resamp.mean()*100:.1f}% del total)')
+    axes[1].set_xlabel('Fecha')
+    fig.tight_layout()
+
     path = os.path.join(out_dir, filename)
     fig.savefig(path)
     plt.close(fig)
@@ -362,7 +493,14 @@ def plot_posterior_tau(chains, out_dir='outputs/figures',
 
 def _df_to_latex(df: pd.DataFrame, caption: str, label: str,
                  fmt: dict | None = None) -> str:
-    """Convierte un DataFrame a tabla LaTeX con booktabs."""
+    """Convierte un DataFrame a tabla LaTeX con booktabs.
+
+    Escapa caracteres especiales de LaTeX (_, %, &, #, ^, ~) tanto en los
+    encabezados de columna como en las celdas de tipo str/object, para
+    evitar errores de compilación con nombres como 'JB_pval' o '95%'
+    (bug presente en versiones anteriores: un guion bajo sin escapar fuera
+    de modo matemático corta la tabla con errores en cascada "Missing $").
+    """
     cols   = df.columns.tolist()
     n_cols = len(cols)
     align  = 'l' + 'r' * (n_cols - 1)
@@ -376,8 +514,8 @@ def _df_to_latex(df: pd.DataFrame, caption: str, label: str,
         rf'\begin{{tabular}}{{{align}}}',
         r'\toprule',
     ]
-    # Encabezado
-    header = ' & '.join(str(c) for c in cols) + r' \\'
+    # Encabezado (escapado)
+    header = ' & '.join(_escape_latex(str(c)) for c in cols) + r' \\'
     lines += [header, r'\midrule']
 
     # Filas
@@ -389,8 +527,10 @@ def _df_to_latex(df: pd.DataFrame, caption: str, label: str,
                 cells.append(fmt[c].format(val))
             elif isinstance(val, float):
                 cells.append(f'{val:.4f}')
-            else:
+            elif isinstance(val, (int, np.integer)):
                 cells.append(str(val))
+            else:
+                cells.append(_escape_latex(str(val)))
         lines.append(' & '.join(cells) + r' \\')
 
     lines += [r'\bottomrule', r'\end{tabular}', r'\end{table}']
@@ -423,7 +563,10 @@ def build_latex_report(config: dict) -> str:
     df_diagnostics : pd.DataFrame de compute_diagnostics()  (Bayesiano)
     df_posterior   : pd.DataFrame de posterior_summary()    (Bayesiano)
     df_comparison  : pd.DataFrame de compare_models()       (OOS)
-    mle_params     : dict {mu, F_diag, Q_diag, R_diag, loglik}  (KF)
+    mle_params     : dict {mu, F_diag, Q_diag, R_diag, loglik, k, aic, bic}  (KF)
+    pf_params      : dict {n_particles, rmse_total, loglik, aic, bic,
+                           k_nuevo, ess_mean, resampled_pct}             (PF)
+    df_residuals_pf: pd.DataFrame de residual_stats() para el PF
     yields_shape   : (T, N)
     maturities     : np.ndarray
     date_start     : str
@@ -441,7 +584,10 @@ def build_latex_report(config: dict) -> str:
     d_start   = config.get('date_start', '')
     d_end     = config.get('date_end', '')
     horizons  = config.get('horizons', [1, 3, 6, 12])
-    today     = datetime.today().strftime('%d de %B de %Y')
+    today     = datetime.today()
+    _MESES_ES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+                'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+    today_str = f"{today.day} de {_MESES_ES[today.month - 1]} de {today.year}"
 
     mats_str  = ', '.join(f'{m:.0f}' for m in mats)
     model_full = ('Dynamic Nelson-Siegel (DNS)'
@@ -519,7 +665,7 @@ def build_latex_report(config: dict) -> str:
     \textcolor{{azulsuave}}{{\rule{{10cm}}{{0.8pt}}}}\\[1.5em]
     {{\large {author}}}\\[0.5em]
     {{\large Proyecto KJM --- Universidad}}\\[0.5em]
-    {{\large {today}}}\\[2em]
+    {{\large {today_str}}}\\[2em]
     \textcolor{{grisoscuro}}{{\small
       Muestra: {d_start} -- {d_end}\\
       Observaciones: {T} d\'ias h\'abiles $\times$ {N} plazos
@@ -623,7 +769,13 @@ def build_latex_report(config: dict) -> str:
     \subsection{{Par\'ametros MLE}}
 
     Log-verosimilitud marginal (KF): $\hat{{\ell}} = {ll_val:,.2f}$.
-
+    """)
+        if 'aic' in mle_p and 'bic' in mle_p:
+            sec_kf += textwrap.dedent(rf"""
+    AIC $= {mle_p['aic']:,.2f}$, \quad BIC $= {mle_p['bic']:,.2f}$
+    \quad ($k = {mle_p.get('k', '?')}$ par\'ametros libres).
+    """)
+        sec_kf += textwrap.dedent(rf"""
     {_df_to_latex(df_mle,
                   'Parametros MLE: media incondicional, persistencia y ruido de transicion.',
                   'tab:mle_params')}
@@ -680,6 +832,20 @@ def build_latex_report(config: dict) -> str:
     \end{{figure}}
     """)
 
+    if 'fig_residuals_heatmap' in figs:
+        sec_resid += textwrap.dedent(rf"""
+    \begin{{figure}}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{{{figs['fig_residuals_heatmap']}}}
+    \caption{{Mapa de calor de residuos de medici\'on: plazos (eje vertical)
+              vs.\ tiempo (eje horizontal). Rojo indica que el modelo
+              subestima el rendimiento observado; azul, que lo sobreestima.
+              \'Util para detectar tramos o periodos donde el error se
+              concentra sistem\'aticamente (p.\,ej.\ quiebres estructurales).}}
+    \label{{fig:residuals_heatmap}}
+    \end{{figure}}
+    """)
+
     # ── Sección 5: Resultados Bayesianos ──────────────────────────────────────
     sec_bayes = ''
     df_diag   = config.get('df_diagnostics')
@@ -721,6 +887,124 @@ def build_latex_report(config: dict) -> str:
     \caption{{Densidades posteriores del par\'ametro de forma $\tau$.
               L\'inea discontinua: mediana. Punteadas: IC 95\%.}}
     \label{{fig:posterior_tau}}
+    \end{{figure}}
+    """)
+
+    # ── Sección PF: Resultados Particle Filter ────────────────────────────────
+    sec_pf = ''
+    pf_p   = config.get('pf_params')
+
+    if pf_p is not None:
+        sec_pf = r'\section{Resultados --- Particle Filter ($\tau_t$ Din\'amico)}' + '\n\n'
+        sec_pf += textwrap.dedent(rf"""
+    A diferencia del Kalman Filter (donde $\tau_t$ es un insumo fijo
+    proveniente del grid search adaptativo) y del Gibbs sampler (donde
+    $\tau$ es est\'atico o sigue un AR(1) latente muestreado v\'ia
+    Metropolis-Hastings), aqu\'i $\tau_t$ se modela como parte del
+    \textbf{{estado aumentado}} $x_t = (\boldsymbol{{\beta}}_t, \log\tau_t)$,
+    evolucionando como un AR(1) en escala logar\'itmica. Esto vuelve la
+    ecuaci\'on de medici\'on no lineal en el estado, lo que motiva un
+    \textit{{Particle Filter}} (Gordon, Salmond \& Smith, 1993) en vez de un
+    Extended Kalman Filter.
+
+    \begin{{nota}}[Advertencia metodol\'ogica]
+    La log-verosimilitud del PF es una \textbf{{estimaci\'on Monte Carlo}}
+    con varianza finita en $N$ (n\'umero de part\'iculas) -- no es un valor
+    exacto como en el KF. El AIC/BIC aqu\'i reportados heredan esa varianza;
+    para una conclusi\'on robusta conviene recalcular con 3--5 semillas
+    distintas y reportar el rango.
+    \end{{nota}}
+
+    \subsection{{Ajuste y Criterios de Informaci\'on}}
+
+    \begin{{itemize}}
+    \item N\'umero de part\'iculas: $N = {pf_p.get('n_particles', '?')}$
+    \item RMSE total: ${pf_p.get('rmse_total', float('nan'))*100:.4f}$ pb
+    \item Log-verosimilitud (estimaci\'on SMC): $\hat{{\ell}}_{{PF}} = {pf_p.get('loglik', float('nan')):,.2f}$
+    \item AIC $= {pf_p.get('aic', float('nan')):,.2f}$, BIC $= {pf_p.get('bic', float('nan')):,.2f}$
+          \quad ($k = {pf_p.get('k_nuevo', '?')}$ -- solo los hiperpar\'ametros
+          \textit{{nuevos}} de la din\'amica de $\tau$; ver nota abajo)
+    \item ESS/N promedio: ${pf_p.get('ess_mean', float('nan')):.3f}$
+          \quad Remuestreos: ${pf_p.get('resampled_pct', float('nan'))*100:.1f}\%$ de los periodos
+    \end{{itemize}}
+
+    \begin{{nota}}[Conteo de $k$ para AIC/BIC]
+    El AIC/BIC del PF aqu\'i reportado cuenta \'unicamente
+    $k=3$ por cada $\tau$ ($\mu_{{\log\tau}}$, $\phi_{{\log\tau}}$,
+    $q_{{\log\tau}}$) -- los par\'ametros que el PF efectivamente
+    \textit{{a\~nade}} sobre el warm-start del KF (cuyos $\mu, F, Q, R$
+    no se reestiman). No es directamente comparable, bajo la misma
+    convenci\'on de conteo, al AIC/BIC del KF de la Secci\'on anterior
+    salvo que se re-cuente $k$ incluyendo todos los par\'ametros del
+    sistema heredados del warm-start.
+    \end{{nota}}
+    """)
+
+        if 'fig_tau_pf' in figs:
+            sec_pf += textwrap.dedent(rf"""
+    \subsection{{Evoluci\'on Din\'amica de $\tau_t$}}
+
+    \begin{{figure}}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{{{figs['fig_tau_pf']}}}
+    \caption{{Evoluci\'on de $\tau_t$ estimada por el Particle Filter
+              (l\'inea s\'olida, con banda de confianza al 95\% sobre la
+              nube de part\'iculas), comparada contra la serie del grid
+              search adaptativo del Kalman Filter (l\'inea discontinua gris).}}
+    \label{{fig:tau_pf}}
+    \end{{figure}}
+    """)
+
+        if 'fig_factors_pf' in figs:
+            sec_pf += textwrap.dedent(rf"""
+    \subsection{{Factores Latentes (Filtrados, PF)}}
+
+    \begin{{figure}}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{{{figs['fig_factors_pf']}}}
+    \caption{{Factores latentes filtrados por el Particle Filter (media
+              ponderada de part\'iculas, con banda de confianza al 95\%).
+              A diferencia de los factores del KF (Secci\'on anterior,
+              estados \textit{{suavizados}} v\'ia RTS), estos son estados
+              \textit{{filtrados}} $\hat{{\boldsymbol{{\beta}}}}_{{t|t}}$ --
+              el PF no implementa a\'un un \textit{{particle smoother}}.}}
+    \label{{fig:factors_pf}}
+    \end{{figure}}
+    """)
+
+        if 'fig_residuals_heatmap_pf' in figs:
+            sec_pf += textwrap.dedent(rf"""
+    \subsection{{Residuos de Medici\'on (PF)}}
+
+    \begin{{figure}}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{{{figs['fig_residuals_heatmap_pf']}}}
+    \caption{{Mapa de calor de residuos de medici\'on del Particle Filter.
+              Misma convenci\'on de color que la Secci\'on de diagn\'ostico
+              de residuos del KF.}}
+    \label{{fig:residuals_heatmap_pf}}
+    \end{{figure}}
+    """)
+
+        df_res_pf = config.get('df_residuals_pf')
+        if df_res_pf is not None:
+            sec_pf += _df_to_latex(
+                df_res_pf,
+                'Estadisticos de residuos de medicion por plazo, Particle Filter (pb).',
+                'tab:residuals_pf') + '\n\n'
+
+        if 'fig_pf_diagnostics' in figs:
+            sec_pf += textwrap.dedent(rf"""
+    \subsection{{Diagn\'ostico de Degeneraci\'on de Part\'iculas}}
+
+    \begin{{figure}}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{{{figs['fig_pf_diagnostics']}}}
+    \caption{{Effective Sample Size (ESS) normalizado por $N$ a lo largo
+              del tiempo (panel superior) y periodos en los que se
+              dispar\'o el remuestreo sistem\'atico (panel inferior).
+              ESS/N bajo indica degeneraci\'on de pesos.}}
+    \label{{fig:pf_diagnostics}}
     \end{{figure}}
     """)
 
@@ -783,7 +1067,7 @@ def build_latex_report(config: dict) -> str:
 
     # ── Ensamblar ─────────────────────────────────────────────────────────────
     content = (preamble + portada + sec_datos + sec_modelo +
-               sec_kf + sec_resid + sec_bayes + sec_oos + sec_refs)
+               sec_kf + sec_resid + sec_bayes + sec_pf + sec_oos + sec_refs)
 
     tex_path = os.path.join(out_dir, 'reporte_dns.tex')
     with open(tex_path, 'w', encoding='utf-8') as f:
@@ -812,7 +1096,8 @@ def compile_pdf(tex_path: str, n_runs: int = 2) -> str | None:
     for run in range(n_runs):
         result = subprocess.run(
             cmd, cwd=tex_dir,
-            capture_output=True, text=True)
+            capture_output=True, text=True,
+            encoding='utf-8', errors='replace')
         if result.returncode != 0 and run == n_runs - 1:
             print(f"\n  [pdflatex] Error en compilación (run {run+1}):")
             # Mostrar solo las líneas de error relevantes
@@ -840,10 +1125,13 @@ def generate_full_report(
     out_dir       = 'outputs',
     # KF
     beta_smooth   = None,
+    P_smooth      = None,
     tau1_t        = None,
     tau2_t        = None,
     mle_params    = None,
     residuals_kf  = None,
+    # Particle Filter
+    res_pf        = None,
     # Bayesiano
     chains        = None,
     df_diagnostics= None,
@@ -858,8 +1146,23 @@ def generate_full_report(
     """
     Función de alto nivel: genera figuras, .tex y compila el PDF.
 
-    Llámala al final de run_kalman.py, run_bayesian.py o run_comparison.py
-    con los objetos ya disponibles en memoria.
+    Llámala al final de run_kalman.py, run_bayesian.py, run_particlefilter.py
+    o run_comparison.py con los objetos ya disponibles en memoria.
+
+    Parámetros nuevos
+    ------------------
+    P_smooth : (T, k, k) | None
+        Covarianza suavizada del KF (rts_smoother). Si se provee junto con
+        beta_smooth, plot_factors() dibuja bandas de confianza al 95% sobre
+        los factores latentes (sqrt de la diagonal de P_smooth).
+    res_pf   : dict | None
+        Resultado del Particle Filter, tal como lo devuelve
+        particle_filter.fit_pf_model()['pf'] (o run_particle_filter()
+        directamente). Si se provee, se genera una sección completa de
+        resultados PF: evolución de tau con bandas (comparada contra
+        tau1_t/tau2_t del KF si también se proveen), factores filtrados
+        con bandas, heatmap de residuos, diagnóstico de ESS/remuestreo,
+        tabla de residuos y AIC/BIC.
 
     Retorna la ruta al PDF generado, o None si pdflatex no está disponible.
     """
@@ -876,22 +1179,31 @@ def generate_full_report(
         plot_yield_curve(yields, dates, maturities, out_dir=fig_dir),
         out_dir).replace('\\', '/')
 
-    # Tau
+    # Tau (KF)
     if tau1_t is not None:
         figs['fig_tau'] = os.path.relpath(
             plot_tau(tau1_t, dates, tau2_t, model, out_dir=fig_dir),
             out_dir).replace('\\', '/')
 
-    # Factores latentes (KF smoother)
+    # Factores latentes (KF smoother), con banda de confianza si hay P_smooth
     if beta_smooth is not None:
+        beta_std_kf = None
+        if P_smooth is not None:
+            k_dim = beta_smooth.shape[1]
+            beta_std_kf = np.sqrt(np.stack(
+                [P_smooth[:, i, i] for i in range(k_dim)], axis=1))
         figs['fig_factors'] = os.path.relpath(
-            plot_factors(beta_smooth, dates, model, out_dir=fig_dir),
+            plot_factors(beta_smooth, dates, model, beta_std=beta_std_kf,
+                         out_dir=fig_dir),
             out_dir).replace('\\', '/')
 
-    # Residuos
+    # Residuos (KF) — series/histograma/QQ + heatmap plazos vs tiempo
     if residuals_kf is not None:
         figs['fig_residuals'] = os.path.relpath(
             plot_residuals(residuals_kf, maturities, dates, out_dir=fig_dir),
+            out_dir).replace('\\', '/')
+        figs['fig_residuals_heatmap'] = os.path.relpath(
+            plot_residuals_heatmap(residuals_kf, maturities, dates, out_dir=fig_dir),
             out_dir).replace('\\', '/')
 
     # MCMC
@@ -902,6 +1214,59 @@ def generate_full_report(
         figs['fig_posterior_tau'] = os.path.relpath(
             plot_posterior_tau(chains, out_dir=fig_dir),
             out_dir).replace('\\', '/')
+
+    # ── Particle Filter ───────────────────────────────────────────────────────
+    pf_params      = None
+    df_residuals_pf = None
+
+    if res_pf is not None:
+        n_beta = 3 if res_pf['model'] == 'DNS' else 4
+        x_filt_mean, x_filt_std = res_pf['x_filt_mean'], res_pf['x_filt_std']
+        pf_dates = res_pf.get('dates', dates)
+
+        # Tau con banda de confianza (percentil log-normal vía std en log-escala)
+        ltau1_m, ltau1_s = x_filt_mean[:, n_beta], x_filt_std[:, n_beta]
+        tau1_band = (np.exp(ltau1_m - 1.96 * ltau1_s), np.exp(ltau1_m + 1.96 * ltau1_s))
+        tau2_band = None
+        tau2_pf = None
+        if res_pf['model'] == 'DNSS':
+            ltau2_m, ltau2_s = x_filt_mean[:, n_beta + 1], x_filt_std[:, n_beta + 1]
+            tau2_band = (np.exp(ltau2_m - 1.96 * ltau2_s), np.exp(ltau2_m + 1.96 * ltau2_s))
+            tau2_pf = res_pf['tau2_t']
+
+        figs['fig_tau_pf'] = os.path.relpath(
+            plot_tau(res_pf['tau1_t'], pf_dates, tau2_pf, res_pf['model'],
+                     tau1_band=tau1_band, tau2_band=tau2_band,
+                     tau1_compare=tau1_t, tau2_compare=tau2_t,
+                     label_compare='KF (grid search)',
+                     out_dir=fig_dir, filename='fig_tau_pf.png'),
+            out_dir).replace('\\', '/')
+
+        figs['fig_factors_pf'] = os.path.relpath(
+            plot_factors(x_filt_mean[:, :n_beta], pf_dates, res_pf['model'],
+                        beta_std=x_filt_std[:, :n_beta],
+                        out_dir=fig_dir, filename='fig_factors_pf.png'),
+            out_dir).replace('\\', '/')
+
+        figs['fig_residuals_heatmap_pf'] = os.path.relpath(
+            plot_residuals_heatmap(res_pf['residuals'], maturities, pf_dates,
+                                   out_dir=fig_dir, filename='fig_residuals_heatmap_pf.png'),
+            out_dir).replace('\\', '/')
+
+        figs['fig_pf_diagnostics'] = os.path.relpath(
+            plot_diagnostics_pf(res_pf, out_dir=fig_dir),
+            out_dir).replace('\\', '/')
+
+        from .diagnostics import residual_stats
+        df_residuals_pf = residual_stats(res_pf['residuals'], maturities, pb_scale=True)
+
+        pf_params = dict(
+            n_particles=res_pf['n_particles'], rmse_total=res_pf['rmse_total'],
+            loglik=res_pf['loglik'], aic=res_pf['aic'], bic=res_pf['bic'],
+            k_nuevo=res_pf['k_nuevo'],
+            ess_mean=float(res_pf['ess_t'].mean() / res_pf['n_particles']),
+            resampled_pct=float(res_pf['resampled_t'].mean()),
+        )
 
     # OOS
     if df_kf is not None and df_bayes is not None:
@@ -916,7 +1281,7 @@ def generate_full_report(
         from .forecasting import compare_models
         df_comparison = compare_models(df_kf, df_bayes, pb_scale=True)
 
-    # Estadísticos de residuos
+    # Estadísticos de residuos (KF)
     df_residuals = None
     if residuals_kf is not None:
         from .diagnostics import residual_stats
@@ -929,10 +1294,12 @@ def generate_full_report(
         'out_dir'       : out_dir,
         'figures'       : figs,
         'df_residuals'  : df_residuals,
+        'df_residuals_pf': df_residuals_pf,
         'df_diagnostics': df_diagnostics,
         'df_posterior'  : df_posterior,
         'df_comparison' : df_comparison,
         'mle_params'    : mle_params,
+        'pf_params'     : pf_params,
         'yields_shape'  : yields.shape,
         'maturities'    : maturities,
         'date_start'    : str(dates[0])[:10],

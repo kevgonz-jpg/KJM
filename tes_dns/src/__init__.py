@@ -7,7 +7,8 @@ Módulos disponibles:
     kalman         — Filtro de Kalman, RTS Smoother, MLE multi-start
     grid_search    — Grid search adaptativo de τ (ventana rodante/expandiente)
     gibbs          — Gibbs sampler Bayesiano con Carter-Kohn FFBS
-    diagnostics    — R-hat, ESS, Ljung-Box, Jarque-Bera, tabla de residuos
+    particle_filter— Bootstrap Particle Filter con τ_t dinámico (estado aumentado)
+    diagnostics    — R-hat, ESS, Ljung-Box, Jarque-Bera, AIC/BIC, tabla de residuos
     forecasting    — Pronóstico OOS, ventana expandiente, RMSE/MAE
     data_loader    — Carga TES desde CSV, índice de días hábiles
 """
@@ -22,14 +23,23 @@ from .gibbs         import (ffbs, kf_loglik,
                             make_priors, make_priors_ar1,
                             initialize_chain, run_chain,
                             run_chains_parallel, run_rolling_bayes)
+from .particle_filter import (calibrate_tau_ar1, predicted_yields,
+                            propagate_beta, propagate_tau, enforce_tau_order,
+                            gaussian_loglik, student_t_loglik, systematic_resample,
+                            run_particle_filter, fit_model_kf_cached, fit_pf_model)
 from .diagnostics   import (gelman_rubin, effective_sample_size,
                             compute_diagnostics, print_diagnostics,
-                            ljung_box_pval, jarque_bera_pval, residual_stats)
+                            ljung_box_pval, jarque_bera_pval, residual_stats,
+                            aic_bic)
 from .forecasting   import (forecast_kf, forecast_bayesian,
                             expanding_window_kf, expanding_window_bayesian,
                             compute_metrics, summary_metrics, compare_models)
 from .data_loader   import load_tes_data, describe_data
-from .report        import generate_full_report, build_latex_report, compile_pdf
+from .report        import (generate_full_report, build_latex_report, compile_pdf,
+                            plot_yield_curve, plot_factors, plot_tau,
+                            plot_residuals, plot_residuals_heatmap,
+                            plot_diagnostics_mcmc, plot_diagnostics_pf,
+                            plot_oos_comparison, plot_posterior_tau)
 
 __all__ = [
     # nelson_siegel
@@ -44,10 +54,15 @@ __all__ = [
     'sample_F_mu_diagonal', 'sample_Q', 'sample_R', 'sample_R_groups',
     'make_priors', 'make_priors_ar1',
     'initialize_chain', 'run_chain', 'run_chains_parallel', 'run_rolling_bayes',
+    # particle_filter
+    'calibrate_tau_ar1', 'predicted_yields',
+    'propagate_beta', 'propagate_tau', 'enforce_tau_order',
+    'gaussian_loglik', 'student_t_loglik', 'systematic_resample',
+    'run_particle_filter', 'fit_model_kf_cached', 'fit_pf_model',
     # diagnostics
     'gelman_rubin', 'effective_sample_size',
     'compute_diagnostics', 'print_diagnostics',
-    'ljung_box_pval', 'jarque_bera_pval', 'residual_stats',
+    'ljung_box_pval', 'jarque_bera_pval', 'residual_stats', 'aic_bic',
     # forecasting
     'forecast_kf', 'forecast_bayesian',
     'expanding_window_kf', 'expanding_window_bayesian',
@@ -56,4 +71,8 @@ __all__ = [
     'load_tes_data', 'describe_data',
     # report
     'generate_full_report', 'build_latex_report', 'compile_pdf',
+    'plot_yield_curve', 'plot_factors', 'plot_tau',
+    'plot_residuals', 'plot_residuals_heatmap',
+    'plot_diagnostics_mcmc', 'plot_diagnostics_pf',
+    'plot_oos_comparison', 'plot_posterior_tau',
 ]

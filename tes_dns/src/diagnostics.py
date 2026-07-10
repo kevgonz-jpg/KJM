@@ -160,6 +160,41 @@ def jarque_bera_pval(series: np.ndarray) -> float:
     return float(stats.jarque_bera(series).pvalue)
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# AIC / BIC — genérico, model-agnostic (KF, Gibbs, PF)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def aic_bic(loglik: float, k: int, T: int) -> tuple:
+    """
+    Criterios de información de Akaike y Bayesiano.
+
+        AIC = 2k − 2·log-lik
+        BIC = k·ln(T) − 2·log-lik
+
+    Parámetros
+    ----------
+    loglik : log-verosimilitud (o estimación SMC del log-lik marginal, en
+             el caso del Particle Filter — ver advertencia abajo)
+    k      : número de parámetros libres del modelo
+    T      : número de observaciones (periodos)
+
+    Advertencia (Particle Filter)
+    ------------------------------
+    Si `loglik` proviene de un PF, es una ESTIMACIÓN Monte Carlo con
+    varianza finita en N (número de partículas), no un valor exacto como en
+    el KF. El AIC/BIC heredan esa varianza. Para una conclusión robusta,
+    recomputar con 3-5 semillas distintas y reportar el rango, no solo el
+    punto estimado.
+
+    Retorna
+    -------
+    (aic, bic) : float, float
+    """
+    aic = 2 * k - 2 * loglik
+    bic = k * np.log(T) - 2 * loglik
+    return float(aic), float(bic)
+
+
 def residual_stats(residuals: np.ndarray,
                    maturities: np.ndarray,
                    pb_scale: bool = True) -> pd.DataFrame:

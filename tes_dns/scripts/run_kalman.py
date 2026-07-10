@@ -39,7 +39,7 @@ from src import (
     rolling_tau_dns, rolling_tau_dnss,
     build_H_array, mle_estimate,
     kalman_filter, rts_smoother,
-    compute_P0_stationary, residual_stats,
+    compute_P0_stationary, residual_stats, aic_bic,
     generate_full_report,
 )
 
@@ -127,6 +127,7 @@ def main():
     np.save(f'{prefix}_beta_filt.npy',   beta_filt)
     np.save(f'{prefix}_beta_smooth.npy', beta_smooth)
     np.save(f'{prefix}_beta_pred.npy',   beta_pred)
+    np.save(f'{prefix}_P_smooth.npy',    P_smooth)
     np.save(f'{prefix}_residuals.npy',   residuals)
     np.save(f'{prefix}_tau1_t.npy',      tau1_t)
     if tau2_t is not None:
@@ -144,6 +145,11 @@ def main():
     print(f"  Residuo RMSE prom.  : {df_res['RMSE'].mean():.3f} pb")
 
     # ── Reporte PDF ───────────────────────────────────────────────────────────
+    k_kf = k + k + k + N   # mu + F_diag + Q_diag + R_diag (libre)
+    aic_kf, bic_kf = aic_bic(loglik, k_kf, T)
+    print(f"  AIC                 : {aic_kf:,.2f}")
+    print(f"  BIC                 : {bic_kf:,.2f}")
+
     print("\nGenerando reporte PDF…")
     generate_full_report(
         yields       = yields,
@@ -153,6 +159,7 @@ def main():
         tau_mode     = 'grid_search',
         out_dir      = args.out_dir,
         beta_smooth  = beta_smooth,
+        P_smooth     = P_smooth,
         tau1_t       = tau1_t,
         tau2_t       = tau2_t,
         mle_params   = {
@@ -161,6 +168,9 @@ def main():
             'Q_diag' : np.diag(Q),
             'R_diag' : R_diag,
             'loglik' : best_ll,
+            'k'      : k_kf,
+            'aic'    : aic_kf,
+            'bic'    : bic_kf,
         },
         residuals_kf = residuals,
     )
